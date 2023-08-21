@@ -29,7 +29,7 @@ export default component$(() => {
   return (
     <>
       <Header />
-      <main>
+      <main class={['mt-[80px]']}>
         <Slot />
       </main>
       <Footer />

@@ -16,7 +16,7 @@ export default component$(() => {
   useContextProvider(seachBarContext, sd);
   return (
     <>
-      <div class={['h-[2000px]', 'pt-[80px]']}>
+      <div class={['h-[2000px]']}>
         <SearchBar></SearchBar>
         <QwitApps></QwitApps>
       </div>

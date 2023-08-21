@@ -1,8 +1,5 @@
-import { component$, useContext, useStore, useTask$, useVisibleTask$ } from "@builder.io/qwik";
-import styles from "./apps.module.css";
-import { QMediaCard } from "../../../integrations/react/card";
-import { Link, useNavigate } from '@builder.io/qwik-city';
-import {seachBarContext} from '../../../routes/index'
+import { component$, useSignal, useStore, useVisibleTask$ } from "@builder.io/qwik";
+import type { DocumentHead } from "@builder.io/qwik-city";
 
 interface appTs {
   name: string;
@@ -49,47 +46,39 @@ const apps:appTs[] = [
     "description": "MindfulMeditation 是您的冥想指南，帮助您在繁忙的生活中找到平静和内心宁静。通过音乐、冥想练习和呼吸控制，MindfulMeditation 将引导您走向心灵的和谐。"
   }
 ]
+
 export default component$(() => {
-  const nav = useNavigate();
-  const seachBarText = useContext(seachBarContext);
-  // console.log('test', seachBarText.text)
-  // const sortApps:appTs[] = useStore(apps)
-  const sortApps:appTs[] = useStore(apps)
-  useVisibleTask$(({ track }) => {
-    track(() => seachBarText.text);
-    console.log('change', seachBarText.text, apps.length, sortApps.length)
-    sortApps.splice(0, sortApps.length)
-    // sortApps = app.filter()
-    if (seachBarText.text === '') {
-      console.log('change2', apps.length, sortApps.length)
-      apps.map((app) => {
-        sortApps.push(app)
-      })
-      // console.log('debug111', apps, sortApps)
-    } else {
-      // console.log('sortApps', sortApps)
-      apps.filter((app) => {
-        if (app.name.toLowerCase().includes(seachBarText.text.toLowerCase())) {
-          sortApps.push(app)
-        }
-      })
-    }    
+  const appInfo = useStore({
+    name: '',
+    url: '',
+    image: '',
+    description: '',
   });
+  useVisibleTask$(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    const appname = urlParams.get('appname');
+    apps.forEach((app) => {
+      if (app.name.toLocaleLowerCase === appname?.toLocaleLowerCase) {
+        appInfo.name = app.name;
+        appInfo.url = app.url;
+        appInfo.image = app.image;
+        appInfo.description = app.description;
+      }
+    })
+  })
+
   return (
-    <div class={['flex', 'mt-[50px]', 'flex-wrap', 'ml-[30px]']}>
-        {sortApps?.map((app) => (
-          <div class={['m-[5px]', styles.cardBox]} key={`CompoentApps-${app.name}`}>
-            <QMediaCard 
-              onClick$={() => (
-                nav(`/app?appname=${app.name}`)
-              )}
-              title={app.name}
-              description={app.description}
-              image={app.image}
-              url={app.url} 
-              /> 
-          </div>
-        ))}
-    </div>
+    <>
+      <div class={['h-[2000px]']}>
+        <h1>{appInfo.name}</h1>
+        <h1>{appInfo.description}</h1>
+      </div>
+    </>
   );
 });
+
+export const head: DocumentHead = {
+  title: "Qwik React",
+};
