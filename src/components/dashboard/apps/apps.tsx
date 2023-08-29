@@ -1,4 +1,4 @@
-import { component$, useContext, useStore, useTask$, useVisibleTask$ } from "@builder.io/qwik";
+import { component$, useContext, useSignal, useStore, useTask$, useVisibleTask$ } from "@builder.io/qwik";
 import styles from "./apps.module.css";
 import { QMediaCard } from "../../../integrations/react/card";
 import { Link, useNavigate } from '@builder.io/qwik-city';
@@ -52,32 +52,21 @@ const apps:appTs[] = [
 export default component$(() => {
   const nav = useNavigate();
   const seachBarText = useContext(seachBarContext);
-  // console.log('test', seachBarText.text)
-  // const sortApps:appTs[] = useStore(apps)
-  const sortApps:appTs[] = useStore(apps)
+  const sortApps = useSignal(apps)
   useVisibleTask$(({ track }) => {
     track(() => seachBarText.text);
-    console.log('change', seachBarText.text, apps.length, sortApps.length)
-    sortApps.splice(0, sortApps.length)
-    // sortApps = app.filter()
+    sortApps.value = []
     if (seachBarText.text === '') {
-      console.log('change2', apps.length, sortApps.length)
-      apps.map((app) => {
-        sortApps.push(app)
-      })
-      // console.log('debug111', apps, sortApps)
+      sortApps.value = apps
     } else {
-      // console.log('sortApps', sortApps)
-      apps.filter((app) => {
-        if (app.name.toLowerCase().includes(seachBarText.text.toLowerCase())) {
-          sortApps.push(app)
-        }
+      sortApps.value = apps.filter((app) => {
+        return app.name.toLowerCase().includes(seachBarText.text.toLowerCase())
       })
     }    
   });
   return (
     <div class={['flex', 'mt-[50px]', 'flex-wrap', 'ml-[30px]']}>
-        {sortApps?.map((app) => (
+        {sortApps.value?.map((app) => (
           <div class={['m-[5px]', styles.cardBox]} key={`CompoentApps-${app.name}`}>
             <QMediaCard 
               onClick$={() => (
