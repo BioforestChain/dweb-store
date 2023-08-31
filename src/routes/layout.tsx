@@ -24,6 +24,29 @@ export const useServerTimeLoader = routeLoader$(() => {
   };
 });
 
+// const delay = (time: number) => new Promise((res) => setTimeout(res, time));
+
+// export interface appTs {
+//   name: string;
+//   url: string;
+//   image: string;
+//   description: string;
+// }
+
+// const randombetween = (min: number, max: number) => {
+//   return Math.floor(Math.random() * (max - min + 1) + min);
+// }
+
+// export const useAppinfoLoader = routeLoader$(async () => {
+//   console.log('delay start')
+//   await delay(1000);
+//   console.log('delay end')
+//   const appNames = ['test1', 'test2', 'test3']
+//   const randomIndex = randombetween(0, appNames.length - 1)
+//   console.log('delay end', randomIndex, appNames[randomIndex])
+//   return appNames[randomIndex]
+// });
+
 export default component$(() => {
   useStyles$(styles);
   return (

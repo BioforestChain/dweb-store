@@ -54,6 +54,7 @@ export default component$(() => {
     image: '',
     description: '',
   });
+
   useVisibleTask$(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -72,8 +73,8 @@ export default component$(() => {
   return (
     <>
       <div class={['h-[2000px]']}>
-        <h1>{appInfo.name}</h1>
-        <h1>{appInfo.description}</h1>
+        <h1 class={['pb-10']}>{appInfo.name}</h1>
+        <h3>{appInfo.description}</h3>
       </div>
     </>
   );
