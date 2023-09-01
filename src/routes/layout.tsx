@@ -1,9 +1,6 @@
-import { component$, Slot, useStyles$ } from "@builder.io/qwik";
+import { component$, Slot, useStyles$, useTask$ } from "@builder.io/qwik";
 import { routeLoader$ } from "@builder.io/qwik-city";
 import type { RequestHandler } from "@builder.io/qwik-city";
-
-import Header from "~/components/dashboard/header/header";
-import Footer from "~/components/dashboard/footer/footer";
 
 import styles from "./styles.css?inline";
 
@@ -47,15 +44,29 @@ export const useServerTimeLoader = routeLoader$(() => {
 //   return appNames[randomIndex]
 // });
 
+export const onRequest: RequestHandler = async ({next, url}) => {
+  console.log('Before request index', url.href);
+  await next();
+  // console.log('After request', url);
+};
+// export const onRequest: RequestHandler = async ({ redirect, url }) => {
+//   const u = new URL('/apps/', url).toString()
+//   console.log('url', u)
+//   throw redirect(
+//     308,
+//     u
+//   );
+// };
+
 export default component$(() => {
   useStyles$(styles);
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <main class={['mt-[80px]']}>
         <Slot />
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 });

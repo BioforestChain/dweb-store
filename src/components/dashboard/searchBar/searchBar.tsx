@@ -1,6 +1,6 @@
 import { component$, useSignal, useTask$, useContext} from "@builder.io/qwik";
 import styles from "./searchBar.module.css";
-import {seachBarContext} from '../../../routes/index'
+import {seachBarContext} from '~/routes/apps/layout'
 
 export default component$(() => {
   const text = useSignal('');

@@ -1,25 +1,14 @@
 import { component$, createContextId, useContextProvider, useStore } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import QwitApps from "~/components/dashboard/apps/apps";
 
-import SearchBar from "~/components/dashboard/searchBar/searchBar";
 
-interface searchBarData {
-  text: string;
-}
-
-export const seachBarContext = createContextId<searchBarData>('app.seachBarText');
 
 
 export default component$(() => {
-  const sd = useStore<searchBarData>({ text: '' });
-
-  useContextProvider(seachBarContext, sd);
   return (
     <>
       <div class={['h-[2000px]']}>
-        <SearchBar></SearchBar>
-        <QwitApps></QwitApps>
+        {/* <QwitApps></QwitApps> */}
       </div>
     </>
   );
