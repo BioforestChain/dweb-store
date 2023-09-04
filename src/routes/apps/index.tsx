@@ -5,9 +5,11 @@ import { QMediaCard } from "~/integrations/react/card";
 import { Link, useNavigate, type DocumentHead } from '@builder.io/qwik-city';
 // import type { DocumentHead } from "@builder.io/qwik-city";
 
-import { appInfo, apps } from '~/routes/api/appInfo/index'
+// import { appInfo, apps } from '~/routes/api/appInfo/index'
 import SearchBar from "~/components/dashboard/searchBar/searchBar";
-import { seachBarContext } from '~/routes/apps/layout'
+import { seachBarContext, useAppList} from '~/routes/apps/layout'
+import { appInfo } from '~/type/app'
+
 
 export default component$(() => {
   // 初始化 seachbartext
@@ -15,12 +17,13 @@ export default component$(() => {
 
   // 导航
   const nav = useNavigate();
-  
+  // 获取app列表
+  const apps = useAppList()
   const sortApps = useSignal<appInfo[]>([])
   useTask$(async () => {
-    const response = await fetch('http://localhost:5173/api/appInfo')
-    const apps = (await response.json()) as appInfo[]
-    sortApps.value = apps
+    // const response = await fetch('http://localhost:5173/api/appInfo')
+    // const apps = (await response.json()) as appInfo[]
+    sortApps.value = apps.value
   });
 
   useTask$(async ({ track }) => {
@@ -29,9 +32,9 @@ export default component$(() => {
     
     sortApps.value = []
     if (seachBarText.text === '') {
-      sortApps.value = apps
+      sortApps.value = apps.value
     } else {
-      sortApps.value = apps.filter((app) => {
+      sortApps.value = apps.value.filter((app) => {
         return app.name.toLowerCase().includes(seachBarText.text.toLowerCase())
       })
     }

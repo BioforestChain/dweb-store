@@ -1,6 +1,7 @@
 import { component$, $, useOnDocument, useStore, useSignal } from "@builder.io/qwik";
 import ImgLogo from "~/media/logo.webp?jsx";
 import styles from "./header.module.css";
+import { Link } from '@builder.io/qwik-city';
 // import styles from "./header.module.css?inline";
 
 
@@ -36,6 +37,11 @@ export default component$(() => {
           </li>
           <li>pricing</li>
           <li>docs</li>
+          <li>
+            <Link href="/manage">
+              manage
+            </Link>
+          </li>
           {/* <li>{opacity.value}</li> */}
         </ul>
       </div>

@@ -43,10 +43,20 @@ export const useServerTimeLoader = routeLoader$(() => {
 //   console.log('delay end', randomIndex, appNames[randomIndex])
 //   return appNames[randomIndex]
 // });
+const getPathFromUrl = (url: string) => {
+  const u = new URL(url);
+  return u.pathname;
+}
 
-export const onRequest: RequestHandler = async ({next, url}) => {
-  console.log('Before request index', url.href);
-  await next();
+export const onRequest: RequestHandler = async ({params, url, redirect}) => {
+  // console.log('Before request index', params, getPathFromUrl(url.href))
+  if (getPathFromUrl(url.href) === '/') {
+    throw redirect(
+      308,
+      new URL('/apps', url).toString()
+    );
+  }
+  // await next();
   // console.log('After request', url);
 };
 // export const onRequest: RequestHandler = async ({ redirect, url }) => {
@@ -59,14 +69,10 @@ export const onRequest: RequestHandler = async ({next, url}) => {
 // };
 
 export default component$(() => {
-  useStyles$(styles);
+  // useStyles$(styles);
   return (
     <>
-      {/* <Header /> */}
-      <main class={['mt-[80px]']}>
-        <Slot />
-      </main>
-      {/* <Footer /> */}
+      <Slot />
     </>
   );
 });
