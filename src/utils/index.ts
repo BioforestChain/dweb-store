@@ -21,3 +21,11 @@ export const load = (path: string) => {
 
 export const delay = (time: number) => new Promise((res) => setTimeout(res, time));
 
+
+export const getPathFromUrl = (url: string) => {
+    const u = new URL(url);
+    return u.pathname;
+}
+
+
+export const log = console.log.bind(console)

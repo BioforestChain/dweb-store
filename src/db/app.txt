@@ -3,60 +3,18 @@
     "name": "fefe",
     "url": "https://www.travelpalapp.com",
     "image": "app_image_url_1",
-    "description": "fefe"
+    "description": "test3333"
   },
   {
-    "name": "fefefe",
+    "name": "fwefw",
     "url": "https://www.travelpalapp.com",
     "image": "app_image_url_1",
-    "description": "fwefwefwefw"
+    "description": "fwefwefw"
   },
   {
-    "name": "应用1",
+    "name": "wefw",
     "url": "https://www.travelpalapp.com",
     "image": "app_image_url_1",
-    "description": "fefefe"
-  },
-  {
-    "name": "Instagram",
-    "url": "https://www.travelpalapp.com",
-    "image": "app_image_url_1",
-    "description": "wfeefwef"
-  },
-  {
-    "name": "fefwefwe",
-    "url": "https://www.travelpalapp.com",
-    "image": "app_image_url_1",
-    "description": "wfewfwefwefw"
-  },
-  {
-    "name": "fwefwefw",
-    "url": "https://www.travelpalapp.com",
-    "image": "app_image_url_1",
-    "description": "fwefwfewf"
-  },
-  {
-    "name": "f2q3f2f2wef",
-    "url": "https://www.travelpalapp.com",
-    "image": "app_image_url_1",
-    "description": "fwefwefwefw"
-  },
-  {
-    "name": "wefwefwe",
-    "url": "https://www.travelpalapp.com",
-    "image": "app_image_url_1",
-    "description": "fefe"
-  },
-  {
-    "name": "test1",
-    "url": "https://www.travelpalapp.com",
-    "image": "app_image_url_1",
-    "description": "testsetse"
-  },
-  {
-    "name": "test2",
-    "url": "https://www.travelpalapp.com",
-    "image": "app_image_url_1",
-    "description": "fefe"
+    "description": "fwefwefwef"
   }
 ]

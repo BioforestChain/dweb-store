@@ -1,5 +1,7 @@
-import { component$, useStore, useSignal, $ } from '@builder.io/qwik';
-import { useAddApp } from '../layout'
+import { component$, useStore, useSignal, $, useContext } from '@builder.io/qwik';
+import { useNavigate } from '@builder.io/qwik-city';
+
+import { useEditApp, editorFormContext } from '../layout'
 
 enum FormStatus {
     'default',
@@ -9,24 +11,28 @@ enum FormStatus {
 }
 
 export default component$(() => {
-    const formAction = useAddApp()
+    const nav = useNavigate();
+    const editForm = useContext(editorFormContext);
+    // console.log('editForm', editForm)
+
+    const formAction = useEditApp()
     const formStatus = useSignal(FormStatus.default)
 
 
     const formItems = useStore({
-        name: '',
-        image: '',
-        url: '',
-        description: ''
+        name: editForm.name || '',
+        image: editForm.image || '',
+        url: editForm.url || '',
+        description: editForm.description || '',
     });
 
-    const clearForm = $(() => {
+    const resetForm = $(() => {
         console.log('clearForm')
         formStatus.value = FormStatus.default
-        formItems.name = ''
-        formItems.image = ''
-        formItems.url = ''
-        formItems.description = ''
+        formItems.name = editForm.name || ''
+        formItems.image = editForm.image || ''
+        formItems.url = editForm.url || ''
+        formItems.description = editForm.description || ''
     });
 
     const onSubmit = $(async () => {
@@ -40,6 +46,7 @@ export default component$(() => {
         console.log('onSubmit end', value)
         if (value?.success) {
             formStatus.value = FormStatus.success
+            nav('/manage')
         } else {
             formStatus.value = FormStatus.error
             if (value.fieldErrors) {
@@ -48,12 +55,8 @@ export default component$(() => {
                 }).join('\n')
                 alert('添加失败\n' + faileMessage)
             }
+            resetForm()
         }
-
-        setTimeout(() => {
-            clearForm()
-        }, 2000);
-        // console.log('onSubmit end', value)
     });
 
     const buttonsInfo = {
@@ -69,7 +72,7 @@ export default component$(() => {
                 class='inline-block w-[45%] p-[10px] mr-[10px] !bg-[#007bff] text-[#fff] border-none rounded-[4px] cursor-pointer'
                 type="submit" onClick$={onSubmit}>{buttonsInfo[formStatus.value]}</button>
             <button class='inline-block w-[45%] p-[10px] mr-[10px] !bg-[#007bff] text-[#fff] border-none rounded-[4px] cursor-pointer'
-                onClick$={clearForm}>取消</button>
+                onClick$={resetForm}>取消</button>
         </>
     })
   return <>

@@ -48,11 +48,44 @@ class App extends Model {
         return app === undefined ? null : app
     }
 
+    static remove(name: string) {
+        const apps = this.all()
+        const index = apps.findIndex((item: appInfo) => {
+            return item.name === name
+        })
+
+        if(index > -1) {
+            apps.splice(index, 1)
+            const path = this.dbPath()
+            save(apps, path)
+            return true
+        } else {
+            return false
+        }
+    }
+
 
     static create(form: appInfo) {
         const uniqueApp = App.findOne('name', form.name) === null
         if(uniqueApp) {
             const app = new App(form)
+            return app
+        } else {
+            return null
+        }
+    }
+
+    static edit(form: appInfo) {
+        const apps = this.all()
+        const app = apps.find((item: appInfo) => {
+            return item.name === form.name
+        })
+        if(app) {
+            app.url = form.url
+            app.image = form.image
+            app.description = form.description
+            const path = this.dbPath()
+            save(apps, path)
             return app
         } else {
             return null
