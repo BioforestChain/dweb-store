@@ -74,7 +74,8 @@ export default component$(() => {
                 <div class='list-none p-0 m-0 text-center py-[100px]'>
                     <ul class='inline-block mx-[10px]'>
                         <Link class='no-underline ml-[20px] text-white hover:text-[#ff5733]' href='/manage/add'>添加应用</Link>
-                        <Link class='no-underline ml-[20px] text-white hover:text-[#ff5733]' href='/manage'>返回首页</Link>
+                        <Link class='no-underline ml-[20px] text-white hover:text-[#ff5733]' href='/manage'>返回manage首页</Link>
+                        <Link class='no-underline ml-[20px] text-white hover:text-[#ff5733]' href='/apps'>返回app首页</Link>
                     </ul>
                 </div>
                 <Slot />

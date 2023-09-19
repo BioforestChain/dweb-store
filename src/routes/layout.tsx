@@ -25,12 +25,15 @@ export const useServerTimeLoader = routeLoader$(() => {
 export const onRequest: RequestHandler = async ({params, url, redirect}) => {
   // console.log('Before request index', params, getPathFromUrl(url.href))
   if (getPathFromUrl(url.href) === '/') {
+    console.log('redirecting to /apps')
     throw redirect(
       308,
       new URL('/apps', url).toString()
     );
-  }
-  // await next();
+  } 
+  // else {
+  //   await next();
+  // }
 };
 
 export default component$(() => {

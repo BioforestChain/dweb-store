@@ -61,9 +61,9 @@ export default component$(() => {
 
     const buttonsInfo = {
         [FormStatus.default]: '提交',
-        [FormStatus.submitting]: '正在添加..',
-        [FormStatus.success]: '添加成功',
-        [FormStatus.error]: '添加失败',
+        [FormStatus.submitting]: '正在修改..',
+        [FormStatus.success]: '修改成功',
+        [FormStatus.error]: '修改失败',
     }
 
     const buttons = (() => {
