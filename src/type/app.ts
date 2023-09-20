@@ -3,4 +3,5 @@ export interface appInfo {
     url: string;
     image: string;
     description: string;
+    status: string;
 }

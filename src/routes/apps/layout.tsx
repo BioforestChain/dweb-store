@@ -2,9 +2,7 @@
 import type { RequestHandler } from "@builder.io/qwik-city";
 import { routeLoader$, Form } from '@builder.io/qwik-city';
 import { component$, Slot, useStyles$, createContextId, useContextProvider, useStore } from "@builder.io/qwik";
-import Header from "~/components/dashboard/header/header";
-import Footer from "~/components/dashboard/footer/footer";
-
+import styles from './apps.module.css'
 // import AppModel from '~/model/app'; // 从model中导入App
 
 const apps = [
@@ -47,25 +45,14 @@ export const useAppList = routeLoader$(async (requestEvent) => {
 });
 
 
-interface searchBarData {
-    text: string;
-}
-
-// 这里放 context，因为在index 里放context，会导致报错
-export const seachBarContext = createContextId<searchBarData>('apps.seachBarText');
-
-
 export default component$(() => {
-    // useStyles$(styles);
-    const sd = useStore<searchBarData>({ text: '' });
-    useContextProvider(seachBarContext, sd);
     return (
       <>
-        <Header />
-        <main class={['bg-[#19176D]', 'pt-[80px]']}>
+        <main class={['bg-[#F7F9FD] pt-[47px] w-[390px] min-h-screen relative overflow-x-hidden']}>
+          <div class='absolute left-0 top-0 w-[280px] h-[280px] opacity-60 bg-[#34F1FF] filter blur-[260px]'></div>
+          <div class='absolute left-[387px] top-[174px] w-[280px] h-[280px] opacity-60 bg-[#0068FF] filter blur-[260px]'></div>
           <Slot />
         </main>
-        <Footer />
       </>
     );
   });

@@ -59,6 +59,9 @@ devDependencies:
   postcss:
     specifier: 8.4.27
     version: registry.npmmirror.com/postcss@8.4.27
+  postcss-px-to-viewport:
+    specifier: ^1.1.1
+    version: registry.npmmirror.com/postcss-px-to-viewport@1.1.1
   prettier:
     specifier: 3.0.0
     version: registry.npmmirror.com/prettier@3.0.0
@@ -4088,6 +4091,15 @@ packages:
     dependencies:
       postcss: registry.npmmirror.com/postcss@8.4.27
       postcss-selector-parser: registry.npmmirror.com/postcss-selector-parser@6.0.13
+    dev: true
+
+  registry.npmmirror.com/postcss-px-to-viewport@1.1.1:
+    resolution: {integrity: sha512-2x9oGnBms+e0cYtBJOZdlwrFg/mLR4P1g2IFu7jYKvnqnH/HLhoKyareW2Q/x4sg0BgklHlP1qeWo2oCyPm8FQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/postcss-px-to-viewport/-/postcss-px-to-viewport-1.1.1.tgz}
+    name: postcss-px-to-viewport
+    version: 1.1.1
+    dependencies:
+      object-assign: registry.npmmirror.com/object-assign@4.1.1
+      postcss: registry.npmmirror.com/postcss@8.4.27
     dev: true
 
   registry.npmmirror.com/postcss-selector-parser@6.0.13:
