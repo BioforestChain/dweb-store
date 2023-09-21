@@ -14,6 +14,6 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: "Welcome to BFMeta",
+  title: "Plaoc App Store",
   meta: [],
 };

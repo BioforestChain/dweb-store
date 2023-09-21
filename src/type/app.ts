@@ -1,7 +1,7 @@
 export interface appInfo {
     name: string;
-    url: string;
-    image: string;
+    logo: string;
     description: string;
-    status: string;
+    status: 'installed' | 'not_installed' | 'installing';
+    metadata_url: string;
 }
