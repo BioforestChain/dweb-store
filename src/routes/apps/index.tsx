@@ -1,8 +1,7 @@
 import { component$, useContext, useSignal, useStore, useTask$, useVisibleTask$, createContextId, useContextProvider, $ } from "@builder.io/qwik";
-import styles from "./apps.module.css";
-import { isServer } from '@builder.io/qwik/build';
-import ImgLogo from '~/media/logo.svg?jsx'
-import Placeholder from '~/media/placeholder.svg?jsx'
+import ImgLogo from '@media/logo.svg'
+import ImgPlaceholder from '@media/placeholder.svg'
+import ImgBannerFont from '@media/banner_font.svg'
 import { Link, useNavigate, type DocumentHead, routeLoader$ } from '@builder.io/qwik-city';
 // import type { DocumentHead } from "@builder.io/qwik-city";
 
@@ -52,7 +51,7 @@ export default component$(() => {
     },
     {
       name: "这里是一个标题这里是一个标题这里是一个标题",
-      logo: "https://pic.616pic.com/ys_bnew_img/00/03/79/vk864b6HcT.jpg",
+      logo: "/src/media/app_logo.png",
       status: 'installed',
       description: "一句简介描述至多18个",
       metadata_url: 'https://dweb.waterbang.top/game/metadata.json'
@@ -79,22 +78,27 @@ export default component$(() => {
   })
   return (
     <div class={['z-10']}> 
+      <div class='absolute left-[-140px] top-[-140px] w-[280px] h-[280px] opacity-80 bg-[#34F1FF] filter blur-[150px] '></div>
+      <div class='absolute right-[-140px] top-[11px] w-[280px] h-[280px] opacity-80 bg-[#0068FF] filter blur-[150px]'></div>
       <div class='w-[390px] h-[48px] px-[24px] mt-[24px] mb-[12px] flex items-center'>
         {/* <ImgLogo class='w-[48px] h-[48px]'></ImgLogo> */}
-        <image src='../../src/media/logo.svg' class='w-[48px] h-[48px]'></image>
+        <image src={ImgLogo} class='w-[48px] h-[48px]'></image>
         <span class='text-[28px] font-bold leading-[normal] tracking-normal text-black ml-[4px]'>Plaoc App Store</span>
       </div>
-      <div class={['w-[342px] h-[220px] rounded-[16px] opacity-100 ml-[24px] bg-cover bg-center bg-local relative overflow-hidden p-[24px]', `bg-[url('../../src/media/headerBg.png')]`]}>
-        <div class='text-[28px] font-bold leading-[normal] tracking-normal text-black h-[82px] flex justify-between flex-col'>
+
+      <div class={['w-[342px] h-[220px] rounded-[16px] opacity-100 ml-[24px] bg-cover bg-center bg-local relative overflow-hidden p-[24px] border-[rgba(0,0,0,0.08)] border-[0.5px]', `bg-[url('/src/media/headerBg.png')]`]}>
+        <div class='text-[28px] font-bold leading-[normal] tracking-normal text-black h-[79px] flex justify-between flex-col'>
           <div>欢迎来到</div>
           <div>Plaoc App Store</div>
         </div>
 
-        <div class='mt-[12px] w-[144px] h-[32px] rounded-[18px] opacity-100 bg-[#0068FF] box-border border-[0.5px] border-[rgba(0,0,0,0.06)] text-[20px] font-normal leading-[32px] tracking-normal text-[#FFFFFF] text-center font-[DingTalk-JinBuTi-Regular]'>探索无限可能</div>
+        <div class='mt-[12px] w-[144px] h-[32px] rounded-[18px] opacity-100 bg-[#0068FF] box-border border-[0.5px] border-[rgba(0,0,0,0.06)] flex justify-center items-center'>
+          <image src={ImgBannerFont} class='w-[120px] h-[24px]'></image>
+        </div>
         
         <div class='absolute pl-[24px] left-0 bottom-0 w-[342px] h-[32px] bg-black/[0.02] box-border backdrop-filter backdrop-blur-lg flex items-center'>
-          <image src='../../src/media/icon_info.svg' class='w-[18px] h-[18px] ml-[4px]'></image>
-          <span class='text-[14px] font-normal leading-[18px] tracking-normal text-black/[0.45]'>应用将安装于 DWeb Browser 中</span>
+          <image src='/src/media/icon_info.svg' class='w-[16px] h-[16px] mr-[4px]'></image>
+          <span class='text-[13px] font-normal leading-[18px] tracking-normal text-black/[0.45]'>应用将安装于 DWeb Browser 中</span>
         </div>
       </div>
 
@@ -108,7 +112,7 @@ export default component$(() => {
           <div class='flex w-[342px] min-h-[92px] relative' key={app.name} onClick$={() => openApp(app as appInfo)}>
             <div class='flex justify-center items-center'>
               <div class='w-[64px] h-[64px] border-[rgba(0,0,0,0.08)] border-[0.5px] rounded-[16px] overflow-hidden bg-white'>
-                <image src={app.logo} onerror="this.src='../../src/media/placeholder.svg'" class='w-[64px] h-[64px]'></image>
+                <image src={app.logo} onerror={`this.src='${ImgPlaceholder}'`} class='w-[64px] h-[64px] rounded-[16px]'></image>
               </div>
               
             </div>
@@ -117,16 +121,17 @@ export default component$(() => {
               <div class='text-[13px] leading-[normal] tracking-normal text-black/[0.45] line-clamp-2'>{app.description}</div>
             </div>
             <div class='flex items-center'>
-              <div class='w-[44px] h-[32px] rounded-[20px] bg-[#E8EFFD] flex items-center justify-center'>
-                <image src='../../src/media/icon_arrow.svg' class='w-[20px] h-[20px]'></image>
+              <div class='w-[44px] h-[32px] rounded-[20px] bg-[rgba(0,104,255,0.06)] flex items-center justify-center'>
+                <image src='/src/media/icon_arrow.svg' class='w-[20px] h-[20px]'></image>
                 {/* <span class='text-[14px] font-medium leading-[normal] tracking-normal text-[#0068FF]'>{app.status === 'installed' ? '打开':'安装'}</span> */}
               </div>
             </div>
             <div class='absolute left-[76px] bottom-0 w-[266px] h-0 opacity-[0.06] border-[0.5px] border-[solid] border-[#000000]'></div>
+            {/* <div class='absolute left-[76px] bottom-0 w-[266px] h-[10px] opacity-[0.06] border-1 border-[solid] border-[#000000]'></div> */}
           </div>
         )) : (
           <div class='flex flex-col items-center pt-[91px]'>
-            <image src='../../src/media/placeholder.svg' class='w-[120px] h-[120px] mb-[16px]'></image>
+            <image src={ImgPlaceholder} class='w-[120px] h-[120px] mb-[16px]'></image>
             <span class='text-[15px] font-normal leading-[normal] text-center tracking-normal text-black/[0.45]'>没有应用信息，刷新一下试试吧</span>
           </div>
         )}
