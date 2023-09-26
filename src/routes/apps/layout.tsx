@@ -1,7 +1,5 @@
 
-import type { RequestHandler } from "@builder.io/qwik-city";
-import { routeLoader$, Form } from '@builder.io/qwik-city';
-import { component$, Slot, useStyles$, createContextId, useContextProvider, useStore } from "@builder.io/qwik";
+import { component$, Slot } from "@builder.io/qwik";
 
 export default component$(() => {
     return (

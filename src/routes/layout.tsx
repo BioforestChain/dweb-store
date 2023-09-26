@@ -1,8 +1,7 @@
-import { component$, Slot, useStyles$, useTask$ } from "@builder.io/qwik";
+import { component$, Slot } from "@builder.io/qwik";
 import { routeLoader$ } from "@builder.io/qwik-city";
 import type { RequestHandler } from "@builder.io/qwik-city";
 import { getPathFromUrl } from "~/utils";
-import styles from "./styles.css?inline";
 
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
@@ -22,7 +21,7 @@ export const useServerTimeLoader = routeLoader$(() => {
   };
 });
 
-export const onRequest: RequestHandler = async ({params, url, redirect}) => {
+export const onRequest: RequestHandler = async ({url, redirect}) => {
   // console.log('Before request index', params, getPathFromUrl(url.href))
   if (getPathFromUrl(url.href) === '/') {
     console.log('redirecting to /apps')
