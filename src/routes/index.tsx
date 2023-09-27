@@ -1,4 +1,4 @@
-import { component$, useSignal, $, useVisibleTask$ } from "@builder.io/qwik";
+import { component$, useSignal, $, useVisibleTask$} from "@builder.io/qwik";
 import { useNavigate, type DocumentHead } from '@builder.io/qwik-city';
 import { type appInfo } from '~/type/app'
 
@@ -8,52 +8,58 @@ import ImgPlaceholder from '@media/placeholder.svg'
 import ImgBannerFont from '@media/banner_font.svg'
 import imgArrow from '@media/icon_arrow.svg'
 import ImgInfo from '@media/icon_info.svg'
+import { ImgHTMLAttributes } from "react";
 
 export default component$(() => {
   // 导航
   const nav = useNavigate();
   // 获取app列表
   const apps = useSignal([
-    {
-        "name": "PlusMeta",
-        "logo": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-app-assets/plusmeta/logo.svg",
-        "description": "PlusMeta应用",
-        "metadata_url": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-apps-test/plusmeta/metadata.json"
-    },
-    {
-      "name": "ETHMeta",
-      "logo": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-app-assets/ethmeta/logo.png",
-      "description": "ETHMeta应用",
-      "metadata_url": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-apps-test/ethmeta/logo.png"
-  }
+    // {
+    //     "name": "PlusMeta",
+    //     "logo": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-app-assets/plusmeta/logofefe.svg",
+    //     "description": "PlusMeta应用",
+    //     "metadata_url": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-apps-test/plusmeta/metadata.json"
+    // },
+    // {
+    //   "name": "ETHMeta",
+    //   "logo": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-app-assets/ethmeta/logo.png",
+    //   "description": "ETHMeta应用",
+    //   "metadata_url": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-apps-test/ethmeta/logo.png"
+    // }
   ] as appInfo[])
 
-  // useVisibleTask$(
-  //   async () => {
-  //     try {
-  //       const url_app1 = '/applist.json'
-  //       const [response1] = await Promise.all([
-  //         fetch(url_app1),
-  //       ]);
+  useVisibleTask$(
+    async () => {
+      try {
+        const url_app1 = '/applist.json'
+        const [response1] = await Promise.all([
+          fetch(url_app1),
+        ]);
 
-  //       // 使用await等待JSON解析
-  //       const data1 = await response1.json();
+        // 使用await等待JSON解析
+        const data1 = await response1.json();
 
-  //       // 在这里处理获取到的数据
-  //       // apps.push(data1)
-  //       apps.value = Object.keys(data1).map((key) => {
-  //         return data1[key] as appInfo
-  //       })
-  //       console.log('获取到的应用信息', apps.value)
-  //     } catch (error) {
-  //       console.error('获取应用信息失败', error);
-  //     }
-  //   }, {strategy: 'document-idle'}
-  // );
+        // 在这里处理获取到的数据
+        // apps.push(data1)
+        apps.value = Object.keys(data1).map((key) => {
+          return data1[key] as appInfo
+        })
+        console.log('获取到的应用信息', apps.value)
+      } catch (error) {
+        console.error('获取应用信息失败', error);
+      }
+    },
+  );
 
   const openApp = $((app: appInfo) => {
     const appUrl = `dweb:install?url=${app.metadata_url}`
     nav(appUrl)
+  })
+
+  const onError = $((event: any) => {
+    const t = event.target as HTMLImageElement
+    t.src= ImgPlaceholder
   })
   return (
     <div class={['z-10']}> 
@@ -91,7 +97,7 @@ export default component$(() => {
           <div class='flex w-[342px] min-h-[92px] relative' key={app.name} onClick$={() => openApp(app as appInfo)}>
             <div class='flex justify-center items-center'>
               <div class='w-[64px] h-[64px] border-[rgba(0,0,0,0.08)] border-[0.5px] rounded-[16px] overflow-hidden bg-white'>
-                <image src={app.logo} onerror={`this.src='${ImgPlaceholder}'`} class='w-[64px] h-[64px] rounded-[16px]'></image>
+                <img src={app.logo} width={64} height={64} onError$={onError} class='w-[64px] h-[64px] rounded-[16px]'></img>
               </div>
               
             </div>
@@ -101,7 +107,7 @@ export default component$(() => {
             </div>
             <div class='flex items-center'>
               <div class='w-[44px] h-[32px] rounded-[20px] bg-[rgba(0,104,255,0.06)] flex items-center justify-center'>
-                <image src={imgArrow} class='w-[20px] h-[20px]'></image>
+                <img src={imgArrow} width={20} height={20} class='w-[20px] h-[20px]'></img>
                 {/* <span class='text-[14px] font-medium leading-[normal] tracking-normal text-[#0068FF]'>{app.status === 'installed' ? '打开':'安装'}</span> */}
               </div>
             </div>
