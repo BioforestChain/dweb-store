@@ -1,0 +1,14 @@
+{
+    "plusmeta": {
+        "name": "PlusMeta",
+        "logo": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-app-assets/plusmeta/logo.svg",
+        "description": "PlusMeta应用",
+        "metadata_url": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-apps-test/plusmeta/metadata.json"
+    },
+    "ethmeta": {
+        "name": "ETHMeta",
+        "logo": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-app-assets/ethmeta/logo.png",
+        "description": "ETHMeta应用",
+        "metadata_url": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-apps-test/ethmeta/logo.png"
+    }
+}

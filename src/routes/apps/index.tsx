@@ -46,28 +46,24 @@ export default component$(() => {
     {
       name: "这里是一个标题",
       logo: "https://pic.616pic.com/ys_bnew_img/00/03/79/vk864bfefe6HcT.jpg",
-      status: 'installed',
       description: "一句简介描述至多18个字",
       metadata_url: 'https://dweb.waterbang.top/game/metadata.json'
     },
     {
       name: "这里是一个标题这里是一个标题这里是一个标题",
       logo: "/src/media/app_logo.png",
-      status: 'installed',
       description: "一句简介描述至多18个",
       metadata_url: 'https://dweb.waterbang.top/game/metadata.json'
     },
     {
       name: "这里是一个标题",
       logo: "https://pic.616pic.com/ys_bnew_img/00/03/79/vk864b6HcT.jpg",
-      status: 'installed',
       description: "一句简介描述至多18个字一句简介描述至多18个字一句简介描述至多18个字",
       metadata_url: 'https://dweb.waterbang.top/game/metadata.json'
     },
     {
       name: "这里是一个标题这里是一个标题这里是一个标题这里是一个标题",
       logo: "https://pic.616pic.com/ys_bnew_img/00/03/79/vk864b6HcT.jpg",
-      status: 'installed',
       description: "一句简介描述至多18个字一句简介描述至多18个字一句简介描述至多18个字",
       metadata_url: 'https://dweb.waterbang.top/game/metadata.json'
     },

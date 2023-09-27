@@ -1,7 +1,6 @@
 import { component$, Slot } from "@builder.io/qwik";
 import { routeLoader$ } from "@builder.io/qwik-city";
 import type { RequestHandler } from "@builder.io/qwik-city";
-import { getPathFromUrl } from "~/utils";
 
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
@@ -21,25 +20,13 @@ export const useServerTimeLoader = routeLoader$(() => {
   };
 });
 
-export const onRequest: RequestHandler = async ({url, redirect}) => {
-  // console.log('Before request index', params, getPathFromUrl(url.href))
-  if (getPathFromUrl(url.href) === '/') {
-    console.log('redirecting to /apps')
-    throw redirect(
-      308,
-      new URL('/apps', url).toString()
-    );
-  } 
-  // else {
-  //   await next();
-  // }
-};
-
 export default component$(() => {
   // useStyles$(styles);
   return (
     <>
-      <Slot />
+      <main class={['bg-[#F7F9FD] w-[390px] min-h-screen relative overflow-x-hidden']}>
+        <Slot />
+      </main>
     </>
   );
 });
