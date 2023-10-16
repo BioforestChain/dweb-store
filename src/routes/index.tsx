@@ -1,6 +1,6 @@
 import { component$, useSignal, $, useVisibleTask$} from "@builder.io/qwik";
 import { useNavigate, type DocumentHead } from '@builder.io/qwik-city';
-import { type appInfo } from '~/type/app'
+import { type AppInfo, type ConfigData } from '~/type/app'
 
 // 图片
 import ImgLogo from '@media/logo.svg'
@@ -8,52 +8,52 @@ import ImgPlaceholder from '@media/placeholder.svg'
 import ImgBannerFont from '@media/banner_font.svg'
 import imgArrow from '@media/icon_arrow.svg'
 import ImgInfo from '@media/icon_info.svg'
-import { ImgHTMLAttributes } from "react";
 
 export default component$(() => {
   // 导航
   const nav = useNavigate();
   // 获取app列表
-  const apps = useSignal([
-    // {
-    //     "name": "PlusMeta",
-    //     "logo": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-app-assets/plusmeta/logofefe.svg",
-    //     "description": "PlusMeta应用",
-    //     "metadata_url": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-apps-test/plusmeta/metadata.json"
-    // },
-    // {
-    //   "name": "ETHMeta",
-    //   "logo": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-app-assets/ethmeta/logo.png",
-    //   "description": "ETHMeta应用",
-    //   "metadata_url": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com/dweb-apps-test/ethmeta/logo.png"
-    // }
-  ] as appInfo[])
-
+  const apps = useSignal([] as AppInfo[])
+  
   useVisibleTask$(
     async () => {
+      const currentURL = window.location.href
+      const isTest = currentURL.indexOf('qastore') > -1 || currentURL.indexOf('localhost') > -1
+      console.log('isTest', isTest, currentURL)
       try {
-        const url_app1 = '/applist.json'
+        const url_app1 = '/applist/applist.json'
         const [response1] = await Promise.all([
           fetch(url_app1),
         ]);
 
-        // 使用await等待JSON解析
-        const data1 = await response1.json();
+        // // 使用await等待JSON解析
+        const data1 = await response1.json() as ConfigData
+        // data1 = fetchData as ConfigData
+        console.log('fefe', data1)
 
         // 在这里处理获取到的数据
-        // apps.push(data1)
-        apps.value = Object.keys(data1).map((key) => {
-          return data1[key] as appInfo
+        const base_config = data1.base_config
+        const base_url_assent = base_config.base_url + base_config.assets_path
+        const base_url_app = isTest ? base_config.base_url + base_config.app_test_path : base_config.base_url + base_config.app_prod_path
+        const applist = data1.applist
+        apps.value = Object.keys(applist).map((key) => {
+          return {
+            name: applist[key].name,
+            description: applist[key].description,
+            logo: base_url_assent + applist[key].logo,
+            metadata: base_url_app + applist[key].metadata,
+          } as AppInfo
         })
-        console.log('获取到的应用信息', apps.value)
+        console.log('获取到的应用信息--------', apps.value)
       } catch (error) {
-        console.error('获取应用信息失败', error);
+        console.error('获取应用信息失败--------', error);
       }
     },
   );
 
-  const openApp = $((app: appInfo) => {
-    const appUrl = `dweb:install?url=${app.metadata_url}`
+  const openApp = $((app: AppInfo) => {
+    // console.log('openApp', app.metadata)
+    const appUrl = `dweb:install?url=${app.metadata}`
     nav(appUrl)
   })
 
@@ -94,7 +94,7 @@ export default component$(() => {
 
       <div class='px-[24px] mb-[36px]'>
         {apps.value.length > 0 ? apps.value.map((app) =>  (
-          <div class='flex w-[342px] min-h-[92px] relative' key={app.name} onClick$={() => openApp(app as appInfo)}>
+          <div class='flex w-[342px] min-h-[92px] relative' key={app.name} onClick$={() => openApp(app as AppInfo)}>
             <div class='flex justify-center items-center'>
               <div class='w-[64px] h-[64px] border-[rgba(0,0,0,0.08)] border-[0.5px] rounded-[16px] overflow-hidden bg-white'>
                 <img src={app.logo} width={64} height={64} onError$={onError} class='w-[64px] h-[64px] rounded-[16px]'></img>
