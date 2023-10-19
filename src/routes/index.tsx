@@ -29,7 +29,7 @@ export default component$(() => {
         // // 使用await等待JSON解析
         const data1 = await response1.json() as ConfigData
         // data1 = fetchData as ConfigData
-        console.log('fefe', data1)
+        // console.log('fefe', data1)
 
         // 在这里处理获取到的数据
         const base_config = data1.base_config
@@ -68,13 +68,13 @@ export default component$(() => {
       <div class='w-[390px] h-[48px] px-[24px] mt-[24px] mb-[12px] flex items-center'>
         {/* <ImgLogo class='w-[48px] h-[48px]'></ImgLogo> */}
         <image src={ImgLogo} class='w-[48px] h-[48px]'></image>
-        <span class='text-[28px] font-bold leading-[normal] tracking-normal text-black ml-[4px]'>Plaoc App Store</span>
+        <span class='text-[28px] font-bold leading-[normal] tracking-normal text-black ml-[4px]'>Metaverse</span>
       </div>
 
       <div class={['w-[342px] h-[220px] rounded-[16px] opacity-100 ml-[24px] bg-cover bg-center bg-local relative overflow-hidden p-[24px] border-[rgba(0,0,0,0.08)] border-[0.5px]', `bg-[url('/src/media/headerBg.png')]`]}>
         <div class='text-[28px] font-bold leading-[normal] tracking-normal text-black h-[79px] flex justify-between flex-col'>
           <div>欢迎来到</div>
-          <div>Plaoc App Store</div>
+          <div>Metaverse</div>
         </div>
 
         <div class='mt-[12px] w-[144px] h-[32px] rounded-[18px] opacity-100 bg-[#0068FF] box-border border-[0.5px] border-[rgba(0,0,0,0.06)] flex justify-center items-center'>
@@ -88,7 +88,7 @@ export default component$(() => {
       </div>
 
       <div class='flex items-center px-[24px] justify-between mt-[24px] mb-[7px]'>
-        <span class='text-[22px] font-bold leading-[normal] tracking-normal text-black'>Plaoc App</span>
+        <span class='text-[22px] font-bold leading-[normal] tracking-normal text-black'>应用</span>
         <div class='text-[14px] font-medium leading-[normal] text-right tracking-normal text-black/[0.65]'>{'全部 ' + apps.value.length || 0}</div>
       </div>
 
