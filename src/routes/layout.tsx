@@ -1,5 +1,6 @@
-import { component$, Slot } from "@builder.io/qwik";
-import { routeLoader$ } from "@builder.io/qwik-city";
+import { component$, Slot, useVisibleTask$ } from "@builder.io/qwik";
+import { routeLoader$, useNavigate } from "@builder.io/qwik-city";
+// import { useNavigate, type DocumentHead } from '@builder.io/qwik-city';
 import type { RequestHandler } from "@builder.io/qwik-city";
 
 
@@ -21,10 +22,19 @@ export const useServerTimeLoader = routeLoader$(() => {
 });
 
 export default component$(() => {
+  const nav = useNavigate();
   // useStyles$(styles);
+  useVisibleTask$(() => {
+    const isPc = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth > 768
+    if (isPc) {
+      nav('/')
+    } else {
+      nav('/')
+    }
+  })
   return (
     <>
-      <main class={['bg-[#F7F9FD] w-[390px] min-h-screen relative overflow-x-hidden']}>
+      <main class={['bg-[#F7F9FD] w-full min-h-screen relative overflow-x-hidden']}>
         <Slot />
       </main>
     </>

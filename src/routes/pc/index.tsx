@@ -12,6 +12,7 @@ import ImgInfo from '@media/icon_info.svg'
 export default component$(() => {
   // 导航
   const nav = useNavigate();
+
   // 获取app列表
   const apps = useSignal([] as AppInfo[])
 
@@ -22,43 +23,15 @@ export default component$(() => {
       const isTest = domain.indexOf('test') > -1 || domain.indexOf('localhost') > -1
       console.log('isTest', isTest, domain)
       try {
-        // const url_app1 = '/applist/applist.json'
-        // const [response1] = await Promise.all([
-        //   fetch(url_app1),
-        // ]);
+        const url_app1 = '/applist/applist.json'
+        const [response1] = await Promise.all([
+          fetch(url_app1),
+        ]);
 
-        // // // 使用await等待JSON解析
-        // const data1 = await response1.json() as ConfigData
-        const data1 = {
-            "base_config": {
-                "base_url": "https://dweb-browser-apps.oss-cn-hongkong.aliyuncs.com",
-                "assets_path": "/dweb-app-assets",
-                "app_test_path": "/dweb-apps-test",
-                "app_prod_path": "/dweb-apps"
-            },
-            "applist": {
-                "ethmeta": {
-                    "name": "ETHMeta",
-                    "logo": "/ethmeta/logo.svg",
-                    "description": "ETHMeta应用",
-                    "metadata": "/ethmeta/metadata.json"
-                },
-                "btcmeta": {
-                    "name": "BTCMeta",
-                    "logo": "/btcmeta/logo.svg",
-                    "description": "BTCMeta应用",
-                    "metadata": "/btcmeta/metadata.json"
-                },
-                "plusmeta": {
-                    "name": "PlusMeta",
-                    "logo": "/plusmeta/logo.svg",
-                    "description": "PlusMeta应用",
-                    "metadata": "/plusmeta/metadata.json"
-                }
-            }
-        } as ConfigData
+        // // 使用await等待JSON解析
+        const data1 = await response1.json() as ConfigData
         // data1 = fetchData as ConfigData
-        console.log('fefe', data1)
+        // console.log('fefe', data1)
 
         // 在这里处理获取到的数据
         const base_config = data1.base_config
@@ -94,13 +67,21 @@ export default component$(() => {
     <div class={['z-10']}> 
       <div class='absolute left-[-140px] top-[-140px] w-[280px] h-[280px] opacity-80 bg-[#34F1FF] filter blur-[150px]'></div>
       <div class='absolute right-[-140px] top-[11px] w-[280px] h-[280px] opacity-80 bg-[#0068FF] filter blur-[150px]'></div>
-      <div class='w-[390px] h-[48px] px-[24px] mt-[24px] mb-[12px] flex items-center'>
+      <div class='absolute
+                  left-0
+                  top-0
+                  w-full
+                  h-[72px]
+                  opacity-100
+                  bg-[rgba(255,_255,_255,_0.6)]
+                  backdrop-filter
+                  backdrop-blur-[32px] flex items-center'>
         {/* <ImgLogo class='w-[48px] h-[48px]'></ImgLogo> */}
         <image src={ImgLogo} class='w-[48px] h-[48px]'></image>
         <span class='text-[28px] font-bold leading-[normal] tracking-normal text-black ml-[4px]'>Dweb Metaverse</span>
       </div>
 
-      <div class={['w-[342px] h-[220px] rounded-[16px] opacity-100 ml-[24px] bg-cover bg-center bg-local relative overflow-hidden p-[24px] border-[rgba(0,0,0,0.08)] border-[0.5px]', `bg-[url('/src/media/headerBg.png')]`]}>
+      <div class={['mt-[112px] w-[342px] h-[220px] rounded-[16px] opacity-100 ml-[24px] bg-cover bg-center bg-local relative overflow-hidden p-[24px] border-[rgba(0,0,0,0.08)] border-[0.5px]', `bg-[url('/src/media/headerBg.png')]`]}>
         <div class='text-[28px] font-bold leading-[normal] tracking-normal text-black h-[79px] flex justify-between flex-col'>
           <div>欢迎来到</div>
           <div>Dweb Metaverse</div>
