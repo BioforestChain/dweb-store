@@ -1,28 +1,23 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 
-onMounted(() => {
-    
-})
-
-
+onMounted(() => {})
 </script>
 
-
 <template>
-  <div :class="['container2']"> 
-      <div :class="['bgColor_top']"></div>
-      <div :class="['bgColor_bottom']"></div>
-      <div :class="['topBar']">
-        <div class="alignCenter" @click="$router.push('/')">
-          <img src="../../assets/media/logo.svg" class="topBar_img" alt="logo" />
-          <span :class="['topBar_title']">Dweb Metaverse</span>
-        </div>
+  <div :class="['container2']">
+    <div :class="['bgColor_top']"></div>
+    <div :class="['bgColor_bottom']"></div>
+    <div :class="['topBar']">
+      <div class="alignCenter" @click="$router.push('/')">
+        <img src="/media/logo.svg" class="topBar_img" alt="logo" />
+        <span :class="['topBar_title']">Dweb Metaverse</span>
       </div>
+    </div>
 
-      <!-- <div class="formContainer">
+    <!-- <div class="formContainer">
         <div class="title">
-          <img src="../../assets/media/tellus.svg" alt="icon">
+          <img src="/media/tellus.svg" alt="icon">
           <span>在线反馈</span>
         </div>
         <iframe src="https://developer.bfmeta.org/zh/dweb%e5%ba%94%e7%94%a8/">
@@ -38,7 +33,7 @@ onMounted(() => {
   height: 571px;
   border-radius: 16px;
 
-  background: #FFFFFF;
+  background: #ffffff;
 
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -81,27 +76,26 @@ onMounted(() => {
 }
 
 .bgColor_top {
-  position: absolute; 
-  opacity: 0.8; 
+  position: absolute;
+  opacity: 0.8;
   left: -140px;
   top: -140px;
   width: 280px;
   height: 280px;
-  background: #34F1FF; 
+  background: #34f1ff;
   filter: blur(150px);
 }
 
 .bgColor_bottom {
-  position: absolute; 
-  opacity: 0.8; 
+  position: absolute;
+  opacity: 0.8;
   right: -140px;
   top: 11px;
   width: 280px;
   height: 280px;
-  background: #0068FF;
+  background: #0068ff;
   filter: blur(150px);
 }
-
 
 .topBar {
   position: absolute;
@@ -139,5 +133,4 @@ onMounted(() => {
   color: #000; /* 或者你想要的黑色颜色 */
   margin-left: 4px;
 }
-
 </style>

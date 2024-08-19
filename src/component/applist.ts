@@ -1,5 +1,10 @@
-import versionService from './version'
-import { type AppInfo, type ConfigData, type BaseConfig, type ProductSetByType } from '../type/app'
+import {
+  type AppInfo,
+  type BaseConfig,
+  type ConfigData,
+  type ProductSetByType
+} from '../type/app.ts'
+import versionService from './version.ts'
 // import { test_data } from '@/help/data'
 
 class AppList {

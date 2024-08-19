@@ -10,7 +10,7 @@
     >
       <img
         class="absolute left-[16px] top-[16px] w-[16px] h-[16px]"
-        src="/src/assets/media/icon_back.svg"
+        src="/media/icon_back.svg"
         @click="$router.push('/')"
       />
       Web3元宇宙生态基金会工具库
@@ -32,13 +32,8 @@
         ></div>
         <!-- 集合标题 -->
         <div class="h-[57px] flex items-center">
-          <img
-            class="w-[28px] h-[28px] ml-[21px] mr-[8px]"
-            :src="item.icon"
-          />
-          <span class="text-[20px] tracking-normal text-[#FFFFFF]">{{
-            item.name
-          }}</span>
+          <img class="w-[28px] h-[28px] ml-[21px] mr-[8px]" :src="item.icon" />
+          <span class="text-[20px] tracking-normal text-[#FFFFFF]">{{ item.name }}</span>
           <span class="text-[20px] font-light ml-[4px] tracking-normal text-[#FFFFFF]">{{
             item.applist.length
           }}</span>
@@ -73,11 +68,7 @@
               v-if="appinfo.website"
               @click="jumpWebsite(appinfo)"
             >
-              <img
-                src="/src/assets/media/icon-website.svg"
-                class="w-[16px] h-[16px] mr-[3px]"
-                alt="icon"
-              />
+              <img src="/media/icon-website.svg" class="w-[16px] h-[16px] mr-[3px]" alt="icon" />
               <span class="text-[14px] tracking-normal text-[#0068FF]">官网</span>
             </div>
             <div
@@ -85,11 +76,7 @@
               v-if="appinfo.metadata"
               @click="openApp(appinfo)"
             >
-              <img
-                src="/src/assets/media/icon-download.svg"
-                class="w-[16px] h-[16px] mr-[3px]"
-                alt="icon"
-              />
+              <img src="/media/icon-download.svg" class="w-[16px] h-[16px] mr-[3px]" alt="icon" />
               <span class="text-[14px] tracking-normal text-[#0068FF]">下载</span>
             </div>
             <div
@@ -97,11 +84,7 @@
               v-if="appinfo.community"
               @click="jumpCommunity(appinfo)"
             >
-              <img
-                src="/src/assets/media/icon-community.svg"
-                class="w-[16px] h-[16px] mr-[3px]"
-                alt="icon"
-              />
+              <img src="/media/icon-community.svg" class="w-[16px] h-[16px] mr-[3px]" alt="icon" />
               <span class="text-[14px] tracking-normal text-[#0068FF]">社区</span>
             </div>
             <div
@@ -109,11 +92,7 @@
               v-if="appinfo.tracker"
               @click="jumpBrowser(appinfo)"
             >
-              <img
-                src="/src/assets/media/icon-browser.svg"
-                class="w-[16px] h-[16px] mr-[3px]"
-                alt="icon"
-              />
+              <img src="/media/icon-browser.svg" class="w-[16px] h-[16px] mr-[3px]" alt="icon" />
               <span class="text-[14px] tracking-normal text-[#0068FF]">浏览器</span>
             </div>
           </div>
@@ -124,12 +103,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
-import { type ProductSetByType, type AppInfo } from '../../type/app'
-import defaultImg from '../../assets/media/placeholder.svg'
-import applistService from '../../component/applist'
-import Dialog from './dialog_downloadBroser.vue'
+import applistService from '@/component/applist'
+import { onMounted, ref } from 'vue'
 import { hexToRgb } from '../../help/index'
+import { type AppInfo, type ProductSetByType } from '../../type/app'
+import Dialog from './dialog_downloadBroser.vue'
 
 const all_products = ref<ProductSetByType[] | undefined>([])
 
@@ -170,6 +148,6 @@ const openApp = (app: AppInfo) => {
 // 图片加载失败时，显示默认图片
 const onError = (e: Event) => {
   const target = e.target as HTMLImageElement
-  target.src = defaultImg
+  target.src = '/media/placeholder.svg'
 }
 </script>

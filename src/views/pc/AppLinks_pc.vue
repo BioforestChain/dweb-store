@@ -1,9 +1,9 @@
 <template>
   <!-- 弹窗 -->
   <div v-if="showTip" class="post_tip">
-    <img src="../../assets/media/icon_info_blue.svg" :class="['post_tip_info']">
+    <img src="/media/icon_info_blue.svg" :class="['post_tip_info']" />
     <div>当前 Dweb Metaverse 仅支持在移动端 DwebBrowser 中安装程序。请在手机登录网址重试。</div>
-    <img src="../../assets/media/icon_x.svg" :class="['post_tip_x']">
+    <img src="/media/icon_x.svg" :class="['post_tip_x']" />
   </div>
   <!-- 主内容 -->
   <!-- topbar -->
@@ -12,12 +12,12 @@
     <div :class="['bgColor_bottom']"></div>
     <div :class="['topBar']">
       <div class="alignCenter" @click="$router.push('/')">
-        <img src="../../assets/media/logo.svg" class="topBar_img" alt="logo" />
+        <img src="/media/logo.svg" class="topBar_img" alt="logo" />
         <span :class="['topBar_title']">Dweb Metaverse</span>
       </div>
 
       <div class="alignCenter topbar_linkContaine" @click="$router.push('/linkPc')">
-        <img src="../../assets/media/icon_link.svg" class="topBar_link_icon" alt="link" />
+        <img src="/media/icon_link.svg" class="topBar_link_icon" alt="link" />
         <span class="topBar_link">链接</span>
       </div>
     </div>
@@ -25,20 +25,12 @@
     <!-- 应用信息 -->
     <div class="applistContainer">
       <div class="linkBox">
-        <img
-          src="/src/assets/media/icon_back_pc.svg"
-          @click="$router.push('/')"
-        />
-        <span>
-          Web3元宇宙生态基金会工具库
-        </span>
+        <img src="/media/icon_back_pc.svg" @click="$router.push('/')" />
+        <span> Web3元宇宙生态基金会工具库 </span>
         <span></span>
       </div>
       <!-- 集合列表 -->
-      <div class="appCelection"
-        v-for="(item, index) in all_products"
-        :key="index"
-      >
+      <div class="appCelection" v-for="(item, index) in all_products" :key="index">
         <!-- 集合背景 -->
         <div
           class="bg"
@@ -49,32 +41,17 @@
         ></div>
         <!-- 集合标题 -->
         <div class="titleBox">
-          <img :src="item.icon"
-          />
-          <span class="title">{{
-            item.name
-          }}</span>
-          <span class="number">{{
-            item.applist.length
-          }}</span>
+          <img :src="item.icon" />
+          <span class="title">{{ item.name }}</span>
+          <span class="number">{{ item.applist.length }}</span>
         </div>
         <!-- 集合应用列表 -->
         <div class="appListBox">
-          <div
-            class="appBlock"
-            v-for="appinfo in item.applist"
-            :key="appinfo.name"
-          >
+          <div class="appBlock" v-for="appinfo in item.applist" :key="appinfo.name">
             <div class="flex flex-row items-center">
               <div class="flex justify-center items-center">
-                <div
-                  class="imgBox"
-                >
-                  <img
-                    :src="appinfo.logo"
-                    @error="(e) => onError(e)"
-                    alt="icon"
-                  />
+                <div class="imgBox">
+                  <img :src="appinfo.logo" @error="(e) => onError(e)" alt="icon" />
                 </div>
               </div>
               <span class="appName">
@@ -83,48 +60,20 @@
             </div>
             <!-- 按钮列表 -->
             <div class="btnsBox">
-              <div
-                class="btn"
-                v-if="appinfo.website"
-                @click="jumpWebsite(appinfo)"
-              >
-                <img
-                  src="/src/assets/media/icon-website.svg"
-                  alt="icon"
-                />
+              <div class="btn" v-if="appinfo.website" @click="jumpWebsite(appinfo)">
+                <img src="/media/icon-website.svg" alt="icon" />
                 <span>官网</span>
               </div>
-              <div
-                class="btn"
-                v-if="appinfo.metadata"
-                @click="openApp()"
-              >
-                <img
-                  src="/src/assets/media/icon-download.svg"
-                  alt="icon"
-                />
+              <div class="btn" v-if="appinfo.metadata" @click="openApp()">
+                <img src="/media/icon-download.svg" alt="icon" />
                 <span>下载</span>
               </div>
-              <div
-                class="btn"
-                v-if="appinfo.community"
-                @click="jumpCommunity(appinfo)"
-              >
-                <img
-                  src="/src/assets/media/icon-community.svg"
-                  alt="icon"
-                />
+              <div class="btn" v-if="appinfo.community" @click="jumpCommunity(appinfo)">
+                <img src="/media/icon-community.svg" alt="icon" />
                 <span>社区</span>
               </div>
-              <div
-                class="btn"
-                v-if="appinfo.tracker"
-                @click="jumpBrowser(appinfo)"
-              >
-                <img
-                  src="/src/assets/media/icon-browser.svg"
-                  alt="icon"
-                />
+              <div class="btn" v-if="appinfo.tracker" @click="jumpBrowser(appinfo)">
+                <img src="/media/icon-browser.svg" alt="icon" />
                 <span>浏览器</span>
               </div>
             </div>
@@ -137,12 +86,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
-import { type ProductSetByType, type AppInfo } from '../../type/app'
-import defaultImg from '../../assets/media/placeholder.svg'
+import { onMounted, ref } from 'vue'
 import applistService from '../../component/applist'
 import { hexToRgb } from '../../help/index'
-
+import { type AppInfo, type ProductSetByType } from '../../type/app'
+import defaultImg from '/media/placeholder.svg'
 
 const all_products = ref<ProductSetByType[] | undefined>([])
 
@@ -169,7 +117,7 @@ const openApp = () => {
 
   timer.value = setTimeout(() => {
     showTip.value = false
-  }, 2000);
+  }, 2000)
 }
 
 const jumpWebsite = (appInfo: AppInfo) => {
@@ -194,7 +142,6 @@ const onError = (e: Event) => {
 }
 </script>
 <style scoped lang="scss">
-
 .container2 {
   position: relative;
   overflow: hidden;
@@ -288,7 +235,6 @@ const onError = (e: Event) => {
   margin-left: 4px;
 }
 
-
 // 应用信息
 .applistContainer {
   width: 100%;
@@ -316,7 +262,7 @@ const onError = (e: Event) => {
       line-height: normal;
       cursor: pointer;
 
-      color: #0068FF;
+      color: #0068ff;
     }
   }
 }
@@ -327,7 +273,7 @@ const onError = (e: Event) => {
   position: relative;
   overflow: hidden;
   margin-bottom: 16px;
-  background-color: #F7F9FD;
+  background-color: #f7f9fd;
   border-radius: 16px;
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -359,14 +305,14 @@ const onError = (e: Event) => {
       font-size: 20px;
       font-weight: bold;
       line-height: normal;
-      color: #FFFFFF;
+      color: #ffffff;
     }
     .number {
       font-size: 20px;
       font-weight: 300;
       line-height: normal;
 
-      color: #FFFFFF;
+      color: #ffffff;
       margin-left: 4px;
     }
   }
@@ -386,7 +332,7 @@ const onError = (e: Event) => {
     margin-bottom: 12px;
     margin-right: 12px;
     border-radius: 8px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.08);
 
     .imgBox {
@@ -395,7 +341,7 @@ const onError = (e: Event) => {
       border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 16px;
       overflow: hidden;
-      background-color: #FFFFFF;
+      background-color: #ffffff;
       img {
         width: 48px;
         height: 48px;
@@ -439,12 +385,11 @@ const onError = (e: Event) => {
         font-size: 12px;
         font-weight: normal;
 
-        color: #0068FF;
+        color: #0068ff;
       }
     }
   }
 }
-
 
 // 弹窗
 .post_tip {
@@ -467,7 +412,7 @@ const onError = (e: Event) => {
   line-height: normal;
   letter-spacing: 0em;
 
-  color: #0068FF;
+  color: #0068ff;
 
   display: flex;
   align-items: center;
@@ -487,6 +432,4 @@ const onError = (e: Event) => {
     right: 12px;
   }
 }
-
-
 </style>

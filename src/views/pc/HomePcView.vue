@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-import { ref, onMounted, watch } from 'vue'
-import { type AppInfo, type ConfigData } from '../../type/app'
-import defaultImg from '../../assets/media/placeholder.svg'
-import img_allApp from '../../assets/media/allApp.png'
+import { onMounted, ref, watch } from 'vue'
 import applistService from '../../component/applist'
+import { type AppInfo } from '../../type/app'
 
 const apps = ref([] as AppInfo[])
 
@@ -18,7 +16,6 @@ const showImageViewer = ref(false)
 const email = '224545yu88@gmail.com'
 
 onMounted(async () => {
-  
   try {
     const applist = await applistService.getApplist()
     //  数据解析
@@ -27,31 +24,27 @@ onMounted(async () => {
     apps.value = apps_all.value
     console.log('获取到的应用信息--------', apps.value)
   } catch (error) {
-    console.error('获取应用信息失败--------', error);
+    console.error('获取应用信息失败--------', error)
   }
-
 })
 
-watch(
-  inputValue,
-  (value) => {
-    filterApps(value)
-  }
-)
+watch(inputValue, (value) => {
+  filterApps(value)
+})
 
 const onError = (e: Event) => {
   const target = e.target as HTMLImageElement
-  target.src = defaultImg
+  target.src = '/media/placeholder.svg'
 }
 
 const filterApps = (value: string) => {
   if (value === '') {
-      apps.value = apps_all.value
-    } else {
-      apps.value = apps_all.value.filter((app) => {
-        return app.name.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) > -1
-      })
-    }
+    apps.value = apps_all.value
+  } else {
+    apps.value = apps_all.value.filter((app) => {
+      return app.name.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) > -1
+    })
+  }
 }
 
 const openApp = (app: AppInfo) => {
@@ -66,28 +59,28 @@ const openApp = (app: AppInfo) => {
 }
 
 const openToast = () => {
-    showTip.value = true
+  showTip.value = true
 }
 
 const closeToast = () => {
-    showTip.value = false
+  showTip.value = false
 }
 
 const copyEamil = () => {
   // 创建一个临时输入框
-  const tempInput = document.createElement('input');
+  const tempInput = document.createElement('input')
   // 将文本内容赋值给临时输入框的值
-  tempInput.value = email;
+  tempInput.value = email
   // 将临时输入框添加到文档中
-  document.body.appendChild(tempInput);
+  document.body.appendChild(tempInput)
   // 选中临时输入框中的文本内容
-  tempInput.select();
+  tempInput.select()
   // 执行复制操作
-  document.execCommand('copy');
+  document.execCommand('copy')
   // 移除临时输入框
-  document.body.removeChild(tempInput);
+  document.body.removeChild(tempInput)
 
-  alert('邮箱已复制到剪贴板');
+  alert('邮箱已复制到剪贴板')
 }
 
 const setVisible = (visible: boolean) => {
@@ -95,92 +88,89 @@ const setVisible = (visible: boolean) => {
 }
 </script>
 
-
 <template>
   <!-- 弹窗 -->
   <!-- <div v-if="showTip" class="post_tip">
-    <img src="../../assets/media/icon_info_blue.svg" :class="['post_tip_info']">
+    <img src="/media/icon_info_blue.svg" :class="['post_tip_info']">
     <div>当前 Dweb Metaverse 仅支持在移动端 DwebBrowser 中安装程序。请在手机登录网址重试。</div>
-    <img src="../../assets/media/icon_x.svg" :class="['post_tip_x']">
+    <img src="/media/icon_x.svg" :class="['post_tip_x']">
   </div> -->
   <div v-if="showTip" class="toast_overlay" @click="closeToast"></div>
   <div v-if="showTip" class="toast">
-    <img src="../../assets/media/close_black.svg" class="close" @click="closeToast">
+    <img src="/media/close_black.svg" class="close" @click="closeToast" />
     <!-- 这里放置弹窗内容 -->
     <div class="title">Dweb Metaverse</div>
     <div class="subTitle">区块链，NFT，交易，钱包</div>
 
-    <img src="../../assets/media/toast_message.svg" class="img_message">
+    <img src="/media/toast_message.svg" class="img_message" />
 
     <div class="email_container">
-      <span>{{email}}</span>
-      <img src="../../assets/media/copy.svg" @click="copyEamil">
+      <span>{{ email }}</span>
+      <img src="/media/copy.svg" @click="copyEamil" />
     </div>
   </div>
   <!-- 主内容 -->
   <main relative ::class="['container']">
-    <div :class="['container2']"> 
+    <div :class="['container2']">
       <div :class="['bgColor_top']"></div>
       <div :class="['bgColor_bottom']"></div>
       <div :class="['topBar']">
         <div class="alignCenter">
-          <img src="../../assets/media/logo.svg" class="topBar_img" alt="logo">
+          <img src="/media/logo.svg" class="topBar_img" alt="logo" />
           <span :class="['topBar_title']">Dweb Metaverse</span>
         </div>
-          
+
         <!-- <div class="alignCenter topbar_linkContaine" @click="$router.push('/linkPc')">
-          <img src="../../assets/media/icon_link.svg" class="topBar_link_icon" alt="link">
+          <img src="/media/icon_link.svg" class="topBar_link_icon" alt="link">
           <span class="topBar_link">链接</span>
         </div> -->
       </div>
       <a-image
-          :style="{ display: 'none' }"
-          :preview="{
-            visible: showImageViewer,
-            onVisibleChange: setVisible,  
-          }"
-          :src="img_allApp"
-        />
+        :style="{ display: 'none' }"
+        :preview="{
+          visible: showImageViewer,
+          onVisibleChange: setVisible
+        }"
+        src="/media/allApp.png"
+      />
       <div class="pc_container">
         <div class="relative">
           <a-carousel :class="['post_container']" :autoplay="true">
             <div class="swipe-item">
-              <img src="../../assets/media/headerBg_pc.png" class="post_container_bg" alt="post_container_bg">
-              <div :class="['post_title_box']">
-                欢迎来到 Dweb Metaverse
-              </div>
-              
+              <img src="/media/headerBg_pc.png" class="post_container_bg" alt="post_container_bg" />
+              <div :class="['post_title_box']">欢迎来到 Dweb Metaverse</div>
+
               <div :class="['post_img_box']">
-                <img src="../../assets/media/banner_font.svg" class="post_img" alt="post_text">
+                <img src="/media/banner_font.svg" class="post_img" alt="post_text" />
               </div>
-              
+
               <div :class="['post_bottom']">
-                <img src="../../assets/media/icon_info.svg" :class="['post_bottom_img']" alt="icon">
+                <img src="/media/icon_info.svg" :class="['post_bottom_img']" alt="icon" />
                 <span :class="['post_bottom_span']">应用将安装于 Dweb Browser 中</span>
               </div>
             </div>
             <!-- <div class="swipe-item">
-              <img src="../../assets/media/headerBg_pc.png" class="post_container_bg" alt="post_container_bg">
+              <img src="/media/headerBg_pc.png" class="post_container_bg" alt="post_container_bg">
               <div :class="['post_title_box']">
                 Web3元宇宙生态基金会工具库
               </div>
               
-              <img @click="setVisible(true)" src="../../assets/media/banner_font3.svg" class="post_img_box" alt="post_text">
+              <img @click="setVisible(true)" src="/media/banner_font3.svg" class="post_img_box" alt="post_text">
               
               <div :class="['post_bottom']">
-                <img src="../../assets/media/icon_info.svg" :class="['post_bottom_img']" alt="icon">
+                <img src="/media/icon_info.svg" :class="['post_bottom_img']" alt="icon">
                 <span :class="['post_bottom_span']">应用将安装于 Dweb Browser 中</span>
               </div>
             </div> -->
           </a-carousel>
         </div>
-        
+
         <div :class="['content_title']">
           <span :class="['content_title_span']">应用</span>
           <div class="content_title_right">
             <div class="content_title_serarch_box">
-              <img src="../../assets/media/icon_search.svg" :class="['content_title_search_icon']" alt="icon">
-              <input v-model="inputValue" class="content_title_input" placeholder="搜索应用">
+              <img src="/media/icon_search.svg" :class="['content_title_search_icon']" alt="icon" />
+              <input v-model="inputValue" class="content_title_input" placeholder="搜索应用" />
               <span class="content_title_search_span">搜索</span>
             </div>
             <div :class="['content_title_right']">{{ '全部 ' + apps.length || 0 }}</div>
@@ -189,10 +179,15 @@ const setVisible = (visible: boolean) => {
 
         <div :class="['content_container']">
           <template v-if="apps.length > 0">
-            <div v-for="(app) in apps" @click="openApp(app)" :class="['content_card']" :key="app.name">
+            <div
+              v-for="app in apps"
+              @click="openApp(app)"
+              :class="['content_card']"
+              :key="app.name"
+            >
               <div :class="['card_image_box']">
                 <div :class="['card_img']">
-                  <img :src="app.logo" class="card_img_img"  @error="e => onError(e)" alt="icon">
+                  <img :src="app.logo" class="card_img_img" @error="(e) => onError(e)" alt="icon" />
                 </div>
               </div>
               <div :class="['card_mid']">
@@ -201,7 +196,7 @@ const setVisible = (visible: boolean) => {
               </div>
               <div :class="['card_arr_box']">
                 <div :class="['card_arrow2']">
-                  <img src="../../assets/media/icon_arrow.svg" class="card_arrow_img" alt="icon">
+                  <img src="/media/icon_arrow.svg" class="card_arrow_img" alt="icon" />
                 </div>
               </div>
               <div :class="['card_line']"></div>
@@ -209,7 +204,7 @@ const setVisible = (visible: boolean) => {
           </template>
           <template v-else>
             <div :class="['no_container']">
-              <img src='../../assets/media/placeholder.svg' :class="['no_img']">
+              <img src="/media/placeholder.svg" :class="['no_img']" />
               <span :class="['no_span']">没有应用信息，刷新一下试试吧</span>
             </div>
           </template>
@@ -231,13 +226,12 @@ const setVisible = (visible: boolean) => {
   </main>
 </template>
 
-
 <style scoped lang="scss">
 .container {
-  overflow-x: hidden; 
-  position: relative; 
-  min-height: 100vh; 
-  background: #F7F9FD;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  background: #f7f9fd;
   width: 370px;
 }
 
@@ -247,24 +241,24 @@ const setVisible = (visible: boolean) => {
 }
 
 .bgColor_top {
-  position: absolute; 
-  opacity: 0.8; 
+  position: absolute;
+  opacity: 0.8;
   left: -140px;
   top: -140px;
   width: 280px;
   height: 280px;
-  background: #34F1FF; 
+  background: #34f1ff;
   filter: blur(150px);
 }
 
 .bgColor_bottom {
-  position: absolute; 
-  opacity: 0.8; 
+  position: absolute;
+  opacity: 0.8;
   right: -140px;
   top: 11px;
   width: 280px;
   height: 280px;
-  background: #0068FF;
+  background: #0068ff;
   filter: blur(150px);
 }
 
@@ -289,7 +283,7 @@ const setVisible = (visible: boolean) => {
   width: 480px;
   height: 400px;
   border-radius: 16px;
-  background-image: url('../../assets/media/toastBg.png'); /* 设置背景图片 */
+  background-image: url('/media/toastBg.png'); /* 设置背景图片 */
   background-color: white; /* 设置背景颜色为白色 */
   background-size: cover;
   background-position: center;
@@ -325,9 +319,9 @@ const setVisible = (visible: boolean) => {
     text-align: center;
     letter-spacing: 0em;
 
-    font-variation-settings: "opsz" auto;
-    font-feature-settings: "kern" on;
-    color: #0068FF;
+    font-variation-settings: 'opsz' auto;
+    font-feature-settings: 'kern' on;
+    color: #0068ff;
 
     margin-top: 56px;
     text-align: center;
@@ -341,7 +335,7 @@ const setVisible = (visible: boolean) => {
     text-align: center;
     letter-spacing: 0em;
 
-    font-feature-settings: "kern" on;
+    font-feature-settings: 'kern' on;
     color: #000000;
 
     margin-top: 4px;
@@ -370,7 +364,7 @@ const setVisible = (visible: boolean) => {
       line-height: normal;
       letter-spacing: 0em;
 
-      font-feature-settings: "kern" on;
+      font-feature-settings: 'kern' on;
       color: #000000;
     }
 
@@ -401,7 +395,7 @@ const setVisible = (visible: boolean) => {
       .img_tellus {
         width: 18px;
         height: 18px;
-        background: url('../../assets/media/tellus.png');
+        background: url('/media/tellus.png');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -410,7 +404,7 @@ const setVisible = (visible: boolean) => {
       .img_contactus {
         width: 18px;
         height: 18px;
-        background: url('../../assets/media/message.png');
+        background: url('/media/message.png');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -429,13 +423,13 @@ const setVisible = (visible: boolean) => {
       &:hover {
         background: rgba(0, 104, 255, 0.06);
         span {
-          color: #0068FF;
+          color: #0068ff;
         }
 
         .img_tellus {
           width: 18px;
           height: 18px;
-          background: url('../../assets/media/tellus1.png');
+          background: url('/media/tellus1.png');
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
@@ -445,11 +439,11 @@ const setVisible = (visible: boolean) => {
         .img_contactus {
           width: 18px;
           height: 18px;
-          background: url('../../assets/media/message1.png');
+          background: url('/media/message1.png');
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
-          background-attachment: local;       
+          background-attachment: local;
         }
       }
     }
@@ -504,7 +498,7 @@ const setVisible = (visible: boolean) => {
   text-align: right;
   letter-spacing: 0em;
 
-  color: #0068FF;
+  color: #0068ff;
   margin-left: 2px;
 }
 
@@ -604,11 +598,11 @@ const setVisible = (visible: boolean) => {
     }
     &.slick-active {
       button {
-        background-color: #0068FF !important;
+        background-color: #0068ff !important;
       }
     }
   }
-} 
+}
 
 .post_title_box {
   font-size: 40px;
@@ -628,7 +622,7 @@ const setVisible = (visible: boolean) => {
   height: 38px;
   border-radius: 18px;
   opacity: 1;
-  background-color: #0068FF;
+  background-color: #0068ff;
   box-sizing: border-box;
   border: 0.5px solid rgba(0, 0, 0, 0.06);
   display: flex;
@@ -743,9 +737,9 @@ const setVisible = (visible: boolean) => {
   line-height: normal;
   letter-spacing: 0em;
 
-  color: #0068FF;
+  color: #0068ff;
   padding-left: 12px;
-  border-left: 1px solid rgba(0,0,0,0.06);
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .content_container {
@@ -857,7 +851,7 @@ const setVisible = (visible: boolean) => {
   flex-direction: column;
   align-items: center;
   padding-top: 91px;
-  margin-left: 407px
+  margin-left: 407px;
 }
 
 .no_span {
@@ -893,7 +887,7 @@ const setVisible = (visible: boolean) => {
   transform: scale(0.8);
 }
 
-.card_arrow_img{
+.card_arrow_img {
   width: 24px;
   height: 24px;
 }

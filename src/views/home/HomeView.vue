@@ -1,18 +1,15 @@
 <script lang="ts" setup>
-import { ref, onMounted, watch } from 'vue'
-import { type AppInfo } from '../../type/app'
+import { type AppInfo } from '@/type/app'
+import { onMounted, ref, watch } from 'vue'
 
-// 静态资原
-import defaultImg from '../../assets/media/placeholder.svg'
-// import testImg from '../../assets/media/allApp.png'
-import applistService from '../../component/applist'
+// import testImg from '/media/allApp.png'
+import applistService from '@/component/applist'
 
 // 组件
 // import 'vant/es/image-preview/style';
 
 // 自写组件
 import Dialog from './dialog_downloadBroser.vue'
-
 
 const apps = ref([] as AppInfo[])
 const apps_all = ref([] as AppInfo[])
@@ -101,7 +98,7 @@ const handleBlur = () => {
 // 图片加载失败时，显示默认图片
 const onError = (e: Event) => {
   const target = e.target as HTMLImageElement
-  target.src = defaultImg
+  target.src = '/media/placeholder.svg'
 }
 
 // 打开应用
@@ -140,31 +137,29 @@ const showTip = ref(false)
 const email = '224545yu88@gmail.com'
 
 const openToast = () => {
-    showTip.value = true
+  showTip.value = true
 }
 
 const closeToast = () => {
-    showTip.value = false
+  showTip.value = false
 }
 
 const copyEamil = () => {
   // 创建一个临时输入框
-  const tempInput = document.createElement('input');
+  const tempInput = document.createElement('input')
   // 将文本内容赋值给临时输入框的值
-  tempInput.value = email;
+  tempInput.value = email
   // 将临时输入框添加到文档中
-  document.body.appendChild(tempInput);
+  document.body.appendChild(tempInput)
   // 选中临时输入框中的文本内容
-  tempInput.select();
+  tempInput.select()
   // 执行复制操作
-  document.execCommand('copy');
+  document.execCommand('copy')
   // 移除临时输入框
-  document.body.removeChild(tempInput);
+  document.body.removeChild(tempInput)
 
-  alert('邮箱已复制到剪贴板');
+  alert('邮箱已复制到剪贴板')
 }
-
-
 </script>
 
 <template>
@@ -174,16 +169,16 @@ const copyEamil = () => {
   <!-- 联系我们弹窗 -->
   <div v-if="showTip" class="toast_overlay" @click="closeToast"></div>
   <div v-if="showTip" class="toast">
-    <img src="../../assets/media/close_black.svg" class="close" @click="closeToast">
+    <img src="/media/close_black.svg" class="close" @click="closeToast" />
     <!-- 这里放置弹窗内容 -->
     <div class="title">Dweb Metaverse</div>
     <div class="subTitle">区块链，NFT，交易，钱包</div>
 
-    <img src="../../assets/media/toast_message.svg" class="img_message">
+    <img src="/media/toast_message.svg" class="img_message" />
 
     <div class="email_container">
-      <span>{{email}}</span>
-      <img src="../../assets/media/copy.svg" @click="copyEamil">
+      <span>{{ email }}</span>
+      <img src="/media/copy.svg" @click="copyEamil" />
     </div>
   </div>
 
@@ -194,13 +189,13 @@ const copyEamil = () => {
         class="absolute bottom-[40px] left-[159px] pointer-events-auto rounded-[20px] opacity-100 box-border border-[0.5px] border-solid border-[rgba(255,255,255,0.45)]"
       >
         <div class="flex justify-center items-center flex-row w-[70px] h-[28px]">
-          <img src="../../assets/media/close.svg" class="w-[16px] h-[16px] mr-[2px]" alt="close" />
+          <img src="/media/close.svg" class="w-[16px] h-[16px] mr-[2px]" alt="close" />
           <div class="text-white text-[14px]">关闭</div>
         </div>
       </div>
       <img
           @click="toggleLandscape"
-          src="../../assets/media/landscape.svg"
+          src="/media/landscape.svg"
           class="absolute bottom-[40px] right-[32px] pointer-events-auto"
           alt="landscape"
         />
@@ -213,11 +208,8 @@ const copyEamil = () => {
     @wheel.prevent="handleScroll"
   >
     <img
-      src="../../assets/media/allApp.png"
-      :class="[
-        { 'rotate-90': isLandscape },
-        isLandscape ? 'max-h-[342px]' : 'max-h-[201px]'
-      ]"
+      src="/media/allApp.png"
+      :class="[{ 'rotate-90': isLandscape }, isLandscape ? 'max-h-[342px]' : 'max-h-[201px]']"
       ref="image"
       alt="Image"
       class="transition-transform transform origin-center"
@@ -227,13 +219,13 @@ const copyEamil = () => {
       class="absolute bottom-[40px] left-[159px] rounded-[20px] opacity-100 box-border border-[0.5px] border-solid border-[rgba(255,255,255,0.45)]"
     >
       <div class="flex justify-center items-center flex-row w-[70px] h-[28px]">
-        <img src="../../assets/media/close.svg" class="w-[16px] h-[16px] mr-[2px]" alt="close" />
+        <img src="/media/close.svg" class="w-[16px] h-[16px] mr-[2px]" alt="close" />
         <div class="text-white text-[14px]">关闭</div>
       </div>
     </div>
     <img
       @click="toggleLandscape"
-      src="../../assets/media/landscape.svg"
+      src="/media/landscape.svg"
       class="absolute bottom-[40px] right-[32px]"
       alt="landscape"
     />
@@ -245,29 +237,25 @@ const copyEamil = () => {
       <div :class="{ bgColor: true }"></div>
       <div :class="['topBar']">
         <div class="alignCenter">
-          <img src="../../assets/media/logo.svg" class="topBar_img" alt="logo" />
+          <img src="/media/logo.svg" class="topBar_img" alt="logo" />
           <span :class="['topBar_title']">Dweb Metaverse</span>
         </div>
         <!-- <div class="alignCenter topbar_linkContaine" @click="$router.push('/link')">
-          <img src="../../assets/media/icon_link.svg" class="topBar_link_icon" alt="link" />
+          <img src="/media/icon_link.svg" class="topBar_link_icon" alt="link" />
           <span class="topBar_link">链接</span>
         </div> -->
       </div>
 
       <van-swipe class="post_container" :autoplay="3000" indicator-color="white">
         <van-swipe-item class="p-[24px] !w-[342px] !h-[220px] box-border">
-          <img
-            src="../../assets/media/headerBg.png"
-            class="post_container_bg"
-            alt="post_container_bg"
-          />
+          <img src="/media/headerBg.png" class="post_container_bg" alt="post_container_bg" />
           <div :class="['post_title_box']">
             <div>欢迎来到</div>
             <div>Dweb Metaverse</div>
           </div>
 
           <div :class="['post_img_box']">
-            <img src="../../assets/media/banner_font.svg" class="post_img" alt="post_text" />
+            <img src="/media/banner_font.svg" class="post_img" alt="post_text" />
           </div>
         </van-swipe-item>
 
@@ -276,7 +264,7 @@ const copyEamil = () => {
           @click="openImageViewer()"
         >
           <img
-            src="../../assets/media/headerBg.png"
+            src="/media/headerBg.png"
             class="post_container_bg"
             alt="post_container_bg"
           />
@@ -286,7 +274,7 @@ const copyEamil = () => {
           </div>
 
           <div :class="['post_img_box', 'w-[136px]']">
-            <img src="../../assets/media/banner_font2.svg" class="post_img2" alt="post_text" />
+            <img src="/media/banner_font2.svg" class="post_img2" alt="post_text" />
           </div>
         </van-swipe-item> -->
 
@@ -302,7 +290,7 @@ const copyEamil = () => {
             ></div>
           </div> -->
           <div :class="['post_bottom']">
-            <img src="../../assets/media/icon_info.svg" :class="['post_bottom_img']" alt="icon" />
+            <img src="/media/icon_info.svg" :class="['post_bottom_img']" alt="icon" />
             <span :class="['post_bottom_span']">应用将安装于 Dweb Browser 中</span>
           </div>
         </template>
@@ -313,11 +301,7 @@ const copyEamil = () => {
       <div :class="['content_title']">
         <span v-if="!inputFocus" :class="['content_title_span']">应用</span>
         <div :class="['content_title_serarch_box']">
-          <img
-            src="../../assets/media/icon_search.svg"
-            :class="['content_title_search_icon']"
-            alt="icon"
-          />
+          <img src="/media/icon_search.svg" :class="['content_title_search_icon']" alt="icon" />
           <input
             v-model="inputValue"
             @focus="handleFocus"
@@ -327,7 +311,7 @@ const copyEamil = () => {
           />
           <img
             v-if="inputValue.length > 0"
-            src="../../assets/media/icon_inputX.svg"
+            src="/media/icon_inputX.svg"
             class="content_title_input_close"
           />
           <!-- <span v-if="inputFocus" class="content_title_search_span">搜索</span> -->
@@ -355,7 +339,7 @@ const copyEamil = () => {
               </div>
               <div :class="['card_arr_box']">
                 <div :class="['card_arrow2']">
-                  <img src="../../assets/media/icon_arrow.svg" class="card_arrow_img" alt="icon" />
+                  <img src="/media/icon_arrow.svg" class="card_arrow_img" alt="icon" />
                 </div>
               </div>
               <div :class="['card_line']"></div>
@@ -363,17 +347,14 @@ const copyEamil = () => {
           </template>
           <template v-else>
             <div :class="['no_container']">
-              <img src="../../assets/media/placeholder.svg" :class="['no_img']" />
+              <img src="/media/placeholder.svg" :class="['no_img']" />
               <span :class="['no_span']">没有应用信息，刷新一下试试吧</span>
             </div>
           </template>
         </template>
         <template v-else>
           <div :class="['no_container']">
-            <img
-              src="../../assets/media/icon_loading.png"
-              :class="['icon_loading', 'rotate-element']"
-            />
+            <img src="/media/icon_loading.png" :class="['icon_loading', 'rotate-element']" />
             <span :class="['no_span']">loading..</span>
           </div>
         </template>
@@ -390,8 +371,6 @@ const copyEamil = () => {
           </div>
       </div> -->
     </div>
-
-    
   </main>
 </template>
 
@@ -451,7 +430,7 @@ const copyEamil = () => {
   width: 342px;
   height: 320px;
   border-radius: 16px;
-  background-image: url('../../assets/media/toastBg.png'); /* 设置背景图片 */
+  background-image: url('/media/toastBg.png'); /* 设置背景图片 */
   background-color: white; /* 设置背景颜色为白色 */
   background-size: cover;
   background-position: center;
@@ -487,9 +466,9 @@ const copyEamil = () => {
     text-align: center;
     letter-spacing: 0em;
 
-    font-variation-settings: "opsz" auto;
-    font-feature-settings: "kern" on;
-    color: #0068FF;
+    font-variation-settings: 'opsz' auto;
+    font-feature-settings: 'kern' on;
+    color: #0068ff;
 
     margin-top: 40px;
     text-align: center;
@@ -503,7 +482,7 @@ const copyEamil = () => {
     text-align: center;
     letter-spacing: 0em;
 
-    font-feature-settings: "kern" on;
+    font-feature-settings: 'kern' on;
     color: #000000;
 
     margin-top: 4px;
@@ -534,7 +513,7 @@ const copyEamil = () => {
       line-height: normal;
       letter-spacing: 0em;
 
-      font-feature-settings: "kern" on;
+      font-feature-settings: 'kern' on;
       color: #000000;
     }
 
@@ -546,7 +525,6 @@ const copyEamil = () => {
   }
 }
 
-
 .buttons {
   width: 100%;
   margin: 0 auto;
@@ -554,7 +532,7 @@ const copyEamil = () => {
   flex-direction: row;
   margin-bottom: 32px;
   justify-content: space-around;
-  
+
   div {
     width: 177px;
     height: 40px;
@@ -567,7 +545,7 @@ const copyEamil = () => {
     .img_tellus {
       width: 18px;
       height: 18px;
-      background: url('../../assets/media/tellus1.png');
+      background: url('/media/tellus1.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -576,7 +554,7 @@ const copyEamil = () => {
     .img_contactus {
       width: 18px;
       height: 18px;
-      background: url('../../assets/media/message1.png');
+      background: url('/media/message1.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -588,7 +566,7 @@ const copyEamil = () => {
       font-weight: normal;
       line-height: normal;
       letter-spacing: 0em;
-      color: #0068FF;
+      color: #0068ff;
     }
   }
 }

@@ -2,13 +2,9 @@
   <div class="pop_container" v-if="show">
     <div class="pop_overlay" @click="closePopup"></div>
     <div class="pop_modal">
-      <img src="../../assets/media/icon_close.svg" class="pop_close" @click="closePopup" />
+      <img src="/media/icon_close.svg" class="pop_close" @click="closePopup" />
       <div class="pop_box">
-        <img
-          src="../../assets/media/pop_download.svg"
-          class="pop_downloadimg"
-          @click="closePopup"
-        />
+        <img src="/media/pop_download.svg" class="pop_downloadimg" @click="closePopup" />
         <div class="pop_text1">当前系统未安装 DwebBrowser 程序</div>
         <div class="pop_text2">请先安装 DwebBrowser 后重试</div>
       </div>
@@ -18,7 +14,7 @@
         </div>
         <div class="pop_download">
           <span class="pop_download_text" @click="clickDown">前往安装</span>
-          <img src="../../assets/media/icon_white_arrow.svg" class="pop_button_arrow" />
+          <img src="/media/icon_white_arrow.svg" class="pop_button_arrow" />
         </div>
       </div>
     </div>
@@ -26,19 +22,19 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, ref } from 'vue';
-import { downloadApp } from '../../help/index';
+import { defineEmits, defineProps } from 'vue'
+import { downloadApp } from '../../help/index'
 
-const props = defineProps(['show']);
-const emit = defineEmits(['update:show']);
+const props = defineProps(['show'])
+const emit = defineEmits(['update:show'])
 
-const closePopup = () => emit('update:show', false);
+const closePopup = () => emit('update:show', false)
 
 const clickDown = () => {
   const packagename = 'info.bagen.dwebbrowser'
   const iosLinkUrl = `https://apps.apple.com/cn/app/6443558874`
   downloadApp(packagename, iosLinkUrl)
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -63,7 +59,7 @@ const clickDown = () => {
   position: fixed;
   top: 50%;
   left: 50%;
-  z-index:999;
+  z-index: 999;
   transform: translate(-50%, -50%);
   position: absolute;
   width: 342px;
@@ -71,7 +67,7 @@ const clickDown = () => {
   border-radius: 16px;
   opacity: 1;
   padding: 24px;
-  background: #F7F9FD;
+  background: #f7f9fd;
 }
 
 .pop_box {
@@ -129,7 +125,7 @@ const clickDown = () => {
   line-height: 40px;
   letter-spacing: 0em;
 
-  color: #000000; 
+  color: #000000;
 }
 
 .pop_cancel {
@@ -147,7 +143,7 @@ const clickDown = () => {
   border-radius: 20px;
   opacity: 1;
 
-  background: #0068FF;
+  background: #0068ff;
   margin-left: 8px;
   text-align: center;
 
@@ -167,10 +163,9 @@ const clickDown = () => {
   line-height: 40px;
   text-align: center;
   letter-spacing: 0em;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-right: 2px;
 }
-
 
 .pop_button {
   background-color: #007bff;
