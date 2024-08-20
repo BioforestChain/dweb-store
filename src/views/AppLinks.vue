@@ -104,10 +104,10 @@
 
 <script lang="ts" setup>
 import applistService from '@/component/applist'
+import Dialog from '@/component/DialogDownloadBroser.vue'
 import { onMounted, ref } from 'vue'
-import { hexToRgb } from '../../help/index'
-import { type AppInfo, type ProductSetByType } from '../../type/app'
-import Dialog from './dialog_downloadBroser.vue'
+import { hexToRgb } from '../help/index'
+import { type AppInfo, type ProductSetByType } from '../type/app'
 
 const all_products = ref<ProductSetByType[] | undefined>([])
 

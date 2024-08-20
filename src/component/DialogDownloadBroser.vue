@@ -1,3 +1,25 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { downloadApp } from '../help/index'
+
+const show = ref(false)
+
+const closePopup = () => {
+  show.value = false
+}
+
+const showPopup = () => {
+  show.value = true
+}
+
+const clickDown = () => {
+  const packagename = 'info.bagen.dwebbrowser'
+  const iosLinkUrl = `https://apps.apple.com/cn/app/6443558874`
+  downloadApp(packagename, iosLinkUrl)
+}
+
+defineExpose({ showPopup, closePopup })
+</script>
 <template>
   <div class="pop_container" v-if="show">
     <div class="pop_overlay" @click="closePopup"></div>
@@ -20,29 +42,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { downloadApp } from '../../help/index'
-
-const show = ref(false)
-
-const closePopup = () => {
-  show.value = false
-}
-
-const showPopup = () => {
-  show.value = true
-}
-
-const clickDown = () => {
-  const packagename = 'info.bagen.dwebbrowser'
-  const iosLinkUrl = `https://apps.apple.com/cn/app/6443558874`
-  downloadApp(packagename, iosLinkUrl)
-}
-
-defineExpose({ showPopup, closePopup })
-</script>
 
 <style lang="scss" scoped>
 .pop_container {

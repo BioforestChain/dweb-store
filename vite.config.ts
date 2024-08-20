@@ -1,12 +1,10 @@
 import legacy from '@vitejs/plugin-legacy'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
-import UnoCSS from 'unocss/vite'
 import { defineConfig } from 'vite'
-
-import { VantResolver } from '@vant/auto-import-resolver'
-import Components from 'unplugin-vue-components/vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
+import Components from 'unplugin-vue-components/vite'
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -14,6 +12,14 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       vue(),
+      Components({
+        resolvers: [
+            // antdv 按需导入
+          AntDesignVueResolver({
+            importStyle: false
+          })
+        ]
+      }),
       createHtmlPlugin({
         inject: {
           data: {
@@ -21,10 +27,6 @@ export default defineConfig(({ mode }) => {
           }
         }
       }),
-      Components({
-        resolvers: [VantResolver()]
-      }),
-      UnoCSS(),
       legacy({
         targets: ['defaults', 'ie >= 11', 'chrome 52'], //需要兼容的目标列表，可以设置多个
         additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
