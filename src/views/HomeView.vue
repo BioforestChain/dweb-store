@@ -10,8 +10,8 @@ import { onMounted, ref, watch } from 'vue'
 const apps = ref([] as AppInfo[])
 const apps_all = ref([] as AppInfo[])
 
-const initData = ref(false)
-
+// 是否正在加载数据
+const isLoading = ref(false)
 const ref_dialog = ref<any>(null)
 
 onMounted(async () => {
@@ -28,7 +28,7 @@ onMounted(async () => {
     console.error('获取应用信息失败--------', error)
   }
 
-  initData.value = true
+  isLoading.value = true
 })
 
 const fixStyleBug = () => {
@@ -79,7 +79,7 @@ const openApp = (app: AppInfo) => {
   <!-- 下载dweb_browser应用弹窗 -->
   <Dialog ref="ref_dialog"></Dialog>
   <Header></Header>
-  <div class="container mx-auto p-3">
+  <div class="container mx-auto px-3">
     <Carousel class="shadow-xl rounded-2xl overflow-hidden">
       <CarouseItem
         title="欢迎来到"
@@ -109,166 +109,56 @@ const openApp = (app: AppInfo) => {
         <div class="text-sm text-tran-gray ml-3">{{ `全部 ${apps.length || 0}` }}</div>
       </div>
     </div>
-    <div class="mb-5 grid grid-cols-1 gap-4 content-evenly sm:grid-cols-2 md:grid-cols-3">
-      <template v-if="initData">
-        <template v-if="apps.length > 0">
+    <div class="mt-5 pb-5 min-h-80">
+      <template v-if="isLoading">
+        <div
+          v-if="apps.length > 0"
+          class="grid grid-cols-[repeat(auto-fill,_24rem)] gap-x-4 justify-center"
+        >
           <div
             v-for="app in apps"
-            class="flex justify-around border-b-2 pb-2 max-w-96"
+            class="flex justify-between items-center border-b-2 py-2 mt-2 w-96"
             :key="app.name"
             @click="openApp(app)"
           >
-            <div class="bg-white shadow-md rounded-xl overflow-hidden">
-              <img
-                :src="app.logo"
-                class="card_img_img"
-                width="64"
-                height="64"
-                @error="(e) => onError(e)"
-                alt="icon"
-              />
-            </div>
-            <div :class="['card_mid']">
-              <div :class="['card_name']">{{ app.name }}</div>
-              <div :class="['card_des']">{{ app.description }}</div>
-            </div>
-            <div :class="['card_arr_box']">
-              <div :class="['card_arrow2']">
-                <img src="/media/icon_arrow.svg" class="card_arrow_img" alt="icon" />
+            <div class="flex">
+              <div
+                class="bg-white shadow-md rounded-xl overflow-hidden w-16 h-16 flex justify-center items-center"
+              >
+                <img
+                  :src="app.logo"
+                  class="scale-75"
+                  width="64"
+                  height="64"
+                  @error="(e) => onError(e)"
+                  alt="icon"
+                />
+              </div>
+              <div class="flex flex-col justify-center items-start ml-5 active:scale-95">
+                <div class="text-md font-bold text-black mb-1 overflow-hidden">{{ app.name }}</div>
+                <div class="text-xs text-tran-gray">{{ app.description }}</div>
               </div>
             </div>
+            <div
+              class="flex justify-center items-center w-11 h-8 bg-[#0066ff20] rounded-3xl shadow active:shadow-inner transition-shadow cursor-pointer"
+            >
+              <img src="/media/icon_arrow.svg" width="20" height="20" alt="icon" />
+            </div>
           </div>
-        </template>
+        </div>
         <template v-else>
-          <div :class="['no_container']">
-            <img src="/media/placeholder.svg" :class="['no_img']" />
-            <span :class="['no_span']">没有应用信息，刷新一下试试吧</span>
+          <div class="flex flex-col items-center justify-center mt-36">
+            <img src="/media/placeholder.svg" class="mb-4" width="120" height="120" />
+            <span class="text-xs text-tran-gray">没有应用信息，刷新一下试试吧</span>
           </div>
         </template>
       </template>
       <template v-else>
-        <div :class="['no_container']">
-          <img src="/media/icon_loading.png" :class="['icon_loading', 'rotate-element']" />
-          <span :class="['no_span']">loading..</span>
+        <div class="flex flex-col items-center justify-center mt-36">
+          <img src="/media/icon_loading.png" class="mb-2.5 animate-spin" width="40" height="40" />
+          <span class="text-md font-bold text-gray-400">loading...</span>
         </div>
       </template>
     </div>
   </div>
 </template>
-
-<style scoped lang="scss">
-.card_mid {
-  width: 182px;
-  margin-left: 12px;
-  margin-right: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.card_name {
-  font-size: 16px;
-  font-weight: bold;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #000000;
-  margin-bottom: 4px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.card_des {
-  font-size: 13px;
-  line-height: normal;
-  letter-spacing: normal;
-  color: rgba(0, 0, 0, 0.45);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.card_arr_box {
-  display: flex;
-  align-items: center;
-}
-
-.card_arrow2 {
-  width: 44px;
-  height: 32px;
-  border-radius: 20px;
-  background-color: rgba(0, 104, 255, 0.06);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.no_img {
-  width: 120px;
-  height: 120px;
-  margin-bottom: 16px;
-}
-
-.icon_loading {
-  width: 40px;
-  height: 40px;
-  margin-bottom: 10px;
-}
-
-.rotate-element {
-  animation: rotateAnimation 4s linear infinite; /* 应用旋转动画 */
-}
-
-/* 定义旋转动画 */
-@keyframes rotateAnimation {
-  from {
-    transform: rotate(0deg); /* 从0度开始旋转 */
-  }
-  to {
-    transform: rotate(360deg); /* 旋转一周（360度） */
-  }
-}
-
-.no_container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 91px;
-}
-
-.no_span {
-  font-size: 15px;
-  font-weight: normal;
-  line-height: normal;
-  text-align: center;
-  letter-spacing: normal;
-  color: rgba(0, 0, 0, 0.45);
-}
-
-.topBar_img {
-  width: 40px;
-  height: 40px;
-}
-
-.post_img {
-  width: 120px;
-  height: 24px;
-}
-
-.post_img2 {
-  width: 136px;
-  height: 32px;
-}
-
-.card_img_img {
-  width: 64px;
-  height: 64px;
-  transform: scale(0.8);
-}
-
-.card_arrow_img {
-  width: 20px;
-  height: 20px;
-}
-</style>
