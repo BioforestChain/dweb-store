@@ -19,7 +19,7 @@ defineProps({
         <img :src="svgUrl" class="post_img" alt="post_text" />
       </div>
       <div class="flex mt-5 items-center">
-        <img src="/media/icon_info.svg" :class="['post_bottom_img']" alt="icon" />
+        <img src="/home/icon_info.svg" :class="['post_bottom_img']" alt="icon" />
         <span class="text-gray-400">应用将安装于 Dweb Browser 中</span>
       </div>
     </div>

@@ -21,6 +21,6 @@
     },
     "typeRoots": ["./node_modules/@plaoc/is-dweb/types"]
   },
-  "include": ["src/**/*", "env.d.ts"],
+  "include": ["src/**/*", "env.d.ts", "tmp/Contactus.vue"],
   "exclude": ["node_modules", "dist"]
 }

@@ -8,6 +8,23 @@ module.exports = {
     'bg-btn-hover': 'rgba(0, 104, 255, 0.04)',
     'theme': '#34F1FF',
     'theme2': '#0068FF',
+    screens: {
+      "360": "360px",
+      'sm': '640px',
+      // => @media (min-width: 640px) { ... }
+
+      'md': '768px',
+      // => @media (min-width: 768px) { ... }
+
+      'lg': '1024px',
+      // => @media (min-width: 1024px) { ... }
+
+      'xl': '1280px',
+      // => @media (min-width: 1280px) { ... }
+
+      '2xl': '1536px',
+      // => @media (min-width: 1536px) { ... }
+    },
     extend: {
       backgroundImage: {
         'main-gradient': 'linear-gradient(167deg, #c3f5fe 0%, #dbe9fd 27%, #f7f9fd 95%)',

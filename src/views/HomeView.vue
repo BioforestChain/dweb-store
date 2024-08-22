@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import applistService from '@/component/applist'
 import CarouseItem from '@/component/CarouseItem.vue'
-import Dialog from '@/component/DialogDownloadBroser.vue'
+import DownloadBrowser from '@/component/DownloadBrowser.vue'
 import Header from '@/component/Header.vue'
+import applistService from '@/script/applist'
 import { type AppInfo } from '@/type/app'
 import { Carousel } from 'ant-design-vue'
 import { onMounted, ref, watch } from 'vue'
@@ -12,7 +12,7 @@ const apps_all = ref([] as AppInfo[])
 
 // 是否正在加载数据
 const isLoading = ref(false)
-const ref_dialog = ref<any>(null)
+const downloadBrowserElement = ref<any>(null)
 
 onMounted(async () => {
   // 修复safira 双击放大
@@ -61,15 +61,15 @@ watch(inputValue, (value) => {
 // 图片加载失败时，显示默认图片
 const onError = (e: Event) => {
   const target = e.target as HTMLImageElement
-  target.src = '/media/placeholder.svg'
+  target.src = '/loading/placeholder.svg'
 }
 
 /**打开应用*/
 const openApp = (app: AppInfo) => {
   applistService.jumpApp(app, () => {
     console.log('拉起dewebrower失败, 弹窗下载app')
-    if (ref_dialog.value) {
-      ref_dialog.value.showPopup()
+    if (downloadBrowserElement.value) {
+      downloadBrowserElement.value.showPopup()
     }
   })
 }
@@ -77,7 +77,7 @@ const openApp = (app: AppInfo) => {
 
 <template>
   <!-- 下载dweb_browser应用弹窗 -->
-  <Dialog ref="ref_dialog"></Dialog>
+  <DownloadBrowser ref="downloadBrowserElement"></DownloadBrowser>
   <Header></Header>
   <div class="container mx-auto px-3">
     <Carousel class="shadow-xl rounded-2xl overflow-hidden">
@@ -93,31 +93,33 @@ const openApp = (app: AppInfo) => {
       ></CarouseItem>
     </Carousel>
     <div class="flex justify-between mt-5">
-      <span class="text-xl font-bold text-black">应用</span>
-      <div class="flex justify-between items-center">
+      <span class="flex-shrink-0 text-xl font-bold text-black">应用</span>
+      <div class="flex justify-between items-center ml-3">
         <div
           class="flex items-center bg-white backdrop-opacity-5 rounded-lg border border-white p-1 shadow-sm"
         >
           <img src="/home/icon_search.svg" class="mr-1" width="20" height="20" alt="icon" />
           <input
             v-model="inputValue"
-            class="text-sm text-black outline-none"
+            class="text-sm text-black outline-none flex-1 min-w-0"
             placeholder="搜索应用"
           />
           <span class="text-sm text-regal-blue pl-2 border-l-2 divide-indigo-300">搜索</span>
         </div>
-        <div class="text-sm text-tran-gray ml-3">{{ `全部 ${apps.length || 0}` }}</div>
+        <div class="flex-shrink-0 text-sm text-tran-gray ml-3">
+          {{ `全部 ${apps.length || 0}` }}
+        </div>
       </div>
     </div>
-    <div class="mt-5 pb-5 min-h-80">
+    <div class="mt-5 pb-5 px-2">
       <template v-if="isLoading">
         <div
           v-if="apps.length > 0"
-          class="grid grid-cols-[repeat(auto-fill,_24rem)] gap-x-4 justify-center"
+          class="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-x-4 justify-center"
         >
           <div
             v-for="app in apps"
-            class="flex justify-between items-center border-b-2 divide-slate-400/25 py-2 mt-2 w-96"
+            class="flex justify-between items-center border-b-2 divide-slate-400/25 py-2 mt-2"
             :key="app.name"
             @click="openApp(app)"
           >
@@ -148,14 +150,14 @@ const openApp = (app: AppInfo) => {
         </div>
         <template v-else>
           <div class="flex flex-col items-center justify-center mt-36">
-            <img src="/media/placeholder.svg" class="mb-4" width="120" height="120" />
+            <img src="/loading/placeholder.svg" class="mb-4" width="120" height="120" />
             <span class="text-xs text-tran-gray">没有应用信息，刷新一下试试吧</span>
           </div>
         </template>
       </template>
       <template v-else>
         <div class="flex flex-col items-center justify-center mt-36">
-          <img src="/media/icon_loading.png" class="mb-2.5 animate-spin" width="40" height="40" />
+          <img src="/loading/icon_loading.png" class="mb-2.5 animate-spin" width="40" height="40" />
           <span class="text-md font-bold text-gray-400">loading...</span>
         </div>
       </template>

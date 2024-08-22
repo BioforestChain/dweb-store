@@ -1,10 +1,32 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { downloadApp } from '../help/index'
+
+const show = ref(false)
+
+const closePopup = () => {
+  show.value = false
+}
+
+const showPopup = () => {
+  show.value = true
+}
+
+const clickDown = () => {
+  const packagename = 'info.bagen.dwebbrowser'
+  const iosLinkUrl = `https://apps.apple.com/cn/app/6443558874`
+  downloadApp(packagename, iosLinkUrl)
+}
+
+defineExpose({ showPopup, closePopup })
+</script>
 <template>
   <div class="pop_container" v-if="show">
     <div class="pop_overlay" @click="closePopup"></div>
     <div class="pop_modal">
-      <img src="/media/icon_close.svg" class="pop_close" @click="closePopup" />
+      <img src="/dialog/icon_close.svg" class="pop_close" @click="closePopup" />
       <div class="pop_box">
-        <img src="/media/pop_download.svg" class="pop_downloadimg" @click="closePopup" />
+        <img src="/dialog/pop_download.svg" class="pop_downloadimg" @click="closePopup" />
         <div class="pop_text1">当前系统未安装 DwebBrowser 程序</div>
         <div class="pop_text2">请先安装 DwebBrowser 后重试</div>
       </div>
@@ -14,28 +36,12 @@
         </div>
         <div class="pop_download">
           <span class="pop_download_text" @click="clickDown">前往安装</span>
-          <img src="/media/icon_white_arrow.svg" class="pop_button_arrow" />
+          <img src="/dialog/icon_white_arrow.svg" class="pop_button_arrow" />
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { defineEmits, defineProps } from 'vue'
-import { downloadApp } from '../../help/index'
-
-const props = defineProps(['show'])
-const emit = defineEmits(['update:show'])
-
-const closePopup = () => emit('update:show', false)
-
-const clickDown = () => {
-  const packagename = 'info.bagen.dwebbrowser'
-  const iosLinkUrl = `https://apps.apple.com/cn/app/6443558874`
-  downloadApp(packagename, iosLinkUrl)
-}
-</script>
 
 <style lang="scss" scoped>
 .pop_container {
@@ -49,8 +55,8 @@ const clickDown = () => {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vh;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
