@@ -84,12 +84,12 @@ const openApp = (app: AppInfo) => {
       <CarouseItem
         title="欢迎来到"
         subTitle="Dweb Metaverse"
-        svgUrl="/media/banner_font.svg"
+        svgUrl="/home/banner_font.svg"
       ></CarouseItem>
       <CarouseItem
         title="Web3元宇宙"
         subTitle="生态基金会工具库"
-        svgUrl="/media/banner_font2.svg"
+        svgUrl="/home/banner_font2.svg"
       ></CarouseItem>
     </Carousel>
     <div class="flex justify-between mt-5">
@@ -98,7 +98,7 @@ const openApp = (app: AppInfo) => {
         <div
           class="flex items-center bg-white backdrop-opacity-5 rounded-lg border border-white p-1 shadow-sm"
         >
-          <img src="/media/icon_search.svg" class="mr-1" width="20" height="20" alt="icon" />
+          <img src="/home/icon_search.svg" class="mr-1" width="20" height="20" alt="icon" />
           <input
             v-model="inputValue"
             class="text-sm text-black outline-none"
@@ -117,7 +117,7 @@ const openApp = (app: AppInfo) => {
         >
           <div
             v-for="app in apps"
-            class="flex justify-between items-center border-b-2 py-2 mt-2 w-96"
+            class="flex justify-between items-center border-b-2 divide-slate-400/25 py-2 mt-2 w-96"
             :key="app.name"
             @click="openApp(app)"
           >
@@ -142,7 +142,7 @@ const openApp = (app: AppInfo) => {
             <div
               class="flex justify-center items-center w-11 h-8 bg-[#0066ff20] rounded-3xl shadow active:shadow-inner transition-shadow cursor-pointer"
             >
-              <img src="/media/icon_arrow.svg" width="20" height="20" alt="icon" />
+              <img src="/home/icon_arrow.svg" width="20" height="20" alt="icon" />
             </div>
           </div>
         </div>

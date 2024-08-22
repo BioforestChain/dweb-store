@@ -11,10 +11,10 @@ module.exports = {
     extend: {
       backgroundImage: {
         'main-gradient': 'linear-gradient(167deg, #c3f5fe 0%, #dbe9fd 27%, #f7f9fd 95%)',
-        "header": "url('/media/headerBg.png')"
+        "header": "url('/home/headerBg.png')"
       },
-      textColor:{
-        "tran-gray":"rgba(0, 0, 0, 0.65)",
+      textColor: {
+        "tran-gray": "rgba(0, 0, 0, 0.65)",
         'regal-blue': '#005ef9',
       },
       backgroundColor: {
@@ -27,7 +27,7 @@ module.exports = {
   },
   plugins: [],
   corePlugins: {
-  //  backgroundRepeat: false,
+    //  backgroundRepeat: false,
   }
 }
 

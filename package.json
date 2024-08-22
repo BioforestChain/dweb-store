@@ -1,14 +1,14 @@
 {
-  "name": "vue-app-center",
+  "name": "dweb-app-store",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build_test": "run-p type-check \"build-only_test {@}\" --",
+    "build_test": "npm run type-check \"build-only_test {@}\" --",
     "preview_test": "pnpm run build_test & vite preview --host",
     "build-only_test": "vite build --mode development",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "npm run type-check & vite build",
     "preview": "pnpm run build & vite preview --host",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.json --composite false",

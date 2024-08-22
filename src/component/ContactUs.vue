@@ -32,7 +32,7 @@ const copyEamil = () => {
   <!-- 联系我们弹窗 -->
   <div v-if="showTip" class="toast_overlay" @click="closeToast"></div>
   <div v-if="showTip" class="toast">
-    <img src="/media/close_black.svg" class="close" @click="closeToast" />
+    <img src="/cantact/close_black.svg" class="close" @click="closeToast" />
     <!-- 这里放置弹窗内容 -->
     <div class="title">Dweb Metaverse</div>
     <div class="subTitle">区块链，NFT，交易，钱包</div>
@@ -68,7 +68,7 @@ const copyEamil = () => {
   width: 342px;
   height: 320px;
   border-radius: 16px;
-  background-image: url('/media/toastBg.png'); /* 设置背景图片 */
+  background-image: url('/cantact/toastBg.png'); /* 设置背景图片 */
   background-color: white; /* 设置背景颜色为白色 */
   background-size: cover;
   background-position: center;
