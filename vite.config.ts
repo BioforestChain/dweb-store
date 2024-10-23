@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => {
       vue(),
       Components({
         resolvers: [
-            // antdv 按需导入
+          // antdv 按需导入
           AntDesignVueResolver({
             importStyle: false
           })
@@ -51,6 +51,13 @@ export default defineConfig(({ mode }) => {
         ]
       })
     ],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler'
+        }
+      }
+    },
     resolve: {
       alias: {
         '@': path.join(__dirname, 'src'),

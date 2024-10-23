@@ -3,7 +3,7 @@ import CarouseItem from '@/component/CarouseItem.vue'
 import DownloadBrowser from '@/component/DownloadBrowser.vue'
 import Header from '@/component/Header.vue'
 import applistService from '@/script/applist'
-import { type AppInfo } from '@/type/app'
+import type { AppInfo } from '@/type/app'
 import { Carousel } from 'ant-design-vue'
 import { onMounted, ref, watch } from 'vue'
 

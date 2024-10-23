@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: ['./index.html', './src/**/*.{vue,js,ts,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./index.html', './src/**/*.{vue,js,ts,tsx}'],
+  darkMode: "media", // or 'media' or 'class'
   theme: {
     'bg': '#F7F9FD', // 背景颜色
     'bg-btn': 'rgba(0, 104, 255, 0.06)',
