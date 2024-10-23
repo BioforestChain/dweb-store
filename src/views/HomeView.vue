@@ -15,7 +15,7 @@ const isLoading = ref(false)
 const downloadBrowserElement = ref<any>(null)
 
 onMounted(async () => {
-  // 修复safira 双击放大
+  // 修复safari 双击放大
   fixStyleBug()
   try {
     const applist = await applistService.getApplist()

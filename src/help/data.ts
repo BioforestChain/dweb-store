@@ -1,4 +1,4 @@
-import { type AppInfo, type ConfigData, type BaseConfig } from '../type/app'
+import type { AppInfo, ConfigData, BaseConfig } from '../type/app.ts'
 
 export const dataFormat = (
   data: ConfigData,
