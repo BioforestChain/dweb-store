@@ -1,4 +1,4 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup vapor></script>
 
 <template>
   <div class="flex justify-between items-center shadow-md rounded-b-md mb-2 px-3.5 min-h-14">

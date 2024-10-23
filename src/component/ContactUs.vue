@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script lang="ts" setup vapor>
 const email = '224545yu88@gmail.com'
 
 defineProps({

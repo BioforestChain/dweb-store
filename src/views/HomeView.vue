@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script lang="ts" setup vapor>
 import CarouseItem from '@/component/CarouseItem.vue'
 import DownloadBrowser from '@/component/DownloadBrowser.vue'
 import Header from '@/component/Header.vue'
