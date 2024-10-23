@@ -1,7 +1,7 @@
 <script lang="ts" setup vapor></script>
 
 <template>
-  <div class="flex justify-between items-center shadow-md rounded-b-md mb-2 px-3.5 min-h-14">
+  <div class="flex justify-between items-center shadow-md rounded-b-md mb-2 px-3.5 min-h-14 sticky top-0 z-10 bg-[#cdeefd]">
     <div class="flex items-center">
       <img src="/header/logo.svg" width="32" height="32" alt="logo" />
       <span class="text-2xl font-bold text-black ml-1">Dweb Metaverse</span>
